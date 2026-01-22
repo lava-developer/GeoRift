@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331e7a0025c0a0942ab07e0eb294a928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileScript
+  knockbackForce: 15
+  damage: 34
+  projectileSpeed: 20
+  lifetime: 15
 --- !u!50 &3801756033977836900
 Rigidbody2D:
   serializedVersion: 5
