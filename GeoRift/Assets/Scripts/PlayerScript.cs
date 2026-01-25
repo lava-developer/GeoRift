@@ -2,17 +2,24 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerScript : MonoBehaviour
 {
-    [SerializeField] float movementSpeed = 10f;
     [SerializeField] int maxHealth = 100;
     int currentHealth;
+    [SerializeField] float movementSpeed = 10f;
+    [SerializeField] float playerKnockbackForce = 30f;
     [SerializeField] float blinkDuration = 0.1f;
     [SerializeField] float blinkInterval = 0.1f;
 
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] GameObject deathParticleSystem;
+    [SerializeField] HealthBar healthBar;
+    [SerializeField] Volume volume;
+    [SerializeField] Color deathVignetteColor;
+    [SerializeField] float deathVignetteIntensity = 0.6f;
 
     Transform tf;
     Rigidbody2D rb;
@@ -22,22 +29,28 @@ public class PlayerScript : MonoBehaviour
     
     Vector2 movementInput;
     MovementState movementState = MovementState.Free;
+    Vignette vignette;
+    Color vignetteOriginalColor;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // Initialize components
         tf = transform;
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponentInParent<Rigidbody2D>();
         cam = Camera.main;
         input = GetComponent<PlayerInput>();
         sr = GetComponent<SpriteRenderer>();
+
+        volume.profile.TryGet<Vignette>(out vignette);
+        vignetteOriginalColor = vignette.color.value;
 
         // Bind input actions
         input.actions["Aim"].performed += OnAim;
         input.actions["Shoot"].performed += OnShoot;
 
         currentHealth = maxHealth;
+        healthBar.InitializeHealthBar(maxHealth);
     }
 
     // Update is called once per frame
@@ -72,8 +85,8 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             IEnemy enemy = collision.gameObject.GetComponent<IEnemy>();
-            TakeDamage(enemy.AttackDamage);
-            Knockback((tf.position - collision.gameObject.transform.position).normalized, enemy.KnockbackForce);
+            enemy.Knockback((collision.gameObject.transform.position - tf.position).normalized, playerKnockbackForce);
+            TakeDamage(enemy.AttackDamage, (tf.position - collision.gameObject.transform.position).normalized, enemy.KnockbackForce);
         }
     }
 
@@ -107,20 +120,29 @@ public class PlayerScript : MonoBehaviour
         StartCoroutine(Blinking());
     }
 
-    void TakeDamage(int damage)
+    void TakeDamage(int damage, Vector2 knockbackDirection, float knockbackForce)
     {
         currentHealth -= damage;
+        float t = currentHealth / (float)maxHealth;
+        t = Mathf.Clamp01(t);
         if (currentHealth <= 0)
         {
+            currentHealth = 0;
             Die();
         }
+        else
+            Knockback(knockbackDirection, knockbackForce);
+        
+        healthBar.UpdateHealthBar(currentHealth);
+        vignette.color.value = Color.Lerp(deathVignetteColor, vignetteOriginalColor, t);
+        vignette.intensity.value = Mathf.Lerp(deathVignetteIntensity, 0.1f, t);
     }
 
     void Die()
     {
         Instantiate(deathParticleSystem, transform.position, Quaternion.identity);
 
-        Destroy(gameObject);
+        tf.parent.gameObject.SetActive(false);
     }
 
     void OnAim(InputAction.CallbackContext context)

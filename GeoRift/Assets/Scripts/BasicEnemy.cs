@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 public class BasicEnemy : MonoBehaviour, IEnemy
 {
@@ -8,23 +9,39 @@ public class BasicEnemy : MonoBehaviour, IEnemy
 
     [SerializeField] int maxHealth = 100;
     int currentHealth;
+    [SerializeField] float immunityDuration = 0.5f;
     [SerializeField] float blinkDuration = 0.1f;
     [SerializeField] float blinkInterval = 0.1f;
 
     [SerializeField] GameObject deathParticleSystem;
+    [SerializeField] HealthBar healthBar;
 
     Rigidbody2D rb;
     SpriteRenderer sr;
+    NavMeshAgent agent;
 
+    Transform target;
+    float movementSpeed;
     MovementState movementState = MovementState.Free;
+    Coroutine blinkCoroutine;
+    Color spriteColor;
 
     void Start()
     {
         // Initialize components
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-
+        agent = GetComponent<NavMeshAgent>();
+        
         currentHealth = maxHealth;
+        healthBar.InitializeHealthBar(maxHealth);
+
+        spriteColor = sr.color;
+
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+        movementSpeed = agent.speed;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void FixedUpdate()
@@ -32,7 +49,8 @@ public class BasicEnemy : MonoBehaviour, IEnemy
         switch (movementState)
         {
             case MovementState.Free:
-                // Can move
+                agent.SetDestination(target.position);
+                break;
             
             case MovementState.Knocked:
                 // Check if knockback has ended and if so return to free movement
@@ -40,16 +58,10 @@ public class BasicEnemy : MonoBehaviour, IEnemy
                 {
                     rb.linearVelocity = Vector2.zero;
                     movementState = MovementState.Free;
+                    agent.speed = movementSpeed;
                 }
                 break;
         }
-    }
-
-    void Die()
-    {
-        Instantiate(deathParticleSystem, transform.position, Quaternion.identity);
-
-        Destroy(gameObject);
     }
 
     enum MovementState
@@ -61,27 +73,35 @@ public class BasicEnemy : MonoBehaviour, IEnemy
     IEnumerator Blinking()
     {
         // Blink sprite white while knocked back
-        Color color = sr.color;
         sr.color = Color.white;
-        while (movementState == MovementState.Knocked)
+
+        int blinkAmount = Mathf.CeilToInt(immunityDuration / (blinkDuration + blinkInterval));
+
+        for (int i = 0; i < blinkAmount; i++)
         {
             sr.enabled = false;
             yield return new WaitForSeconds(blinkDuration);
             sr.enabled = true;
             yield return new WaitForSeconds(blinkInterval);
         }
-        sr.color = color;
+        sr.color = spriteColor;
     }
 
     public void Knockback(Vector2 direction, float force)
     {
         // Apply knockback
+        agent.speed = 0f;
         movementState = MovementState.Knocked;
 
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(direction * force, ForceMode2D.Impulse);
 
-        StartCoroutine(Blinking());
+        if (blinkCoroutine != null)
+        {
+            StopCoroutine(blinkCoroutine);
+        }
+
+        blinkCoroutine = StartCoroutine(Blinking());
     }
 
     public void TakeDamage(int damage)
@@ -90,7 +110,16 @@ public class BasicEnemy : MonoBehaviour, IEnemy
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
+            currentHealth = 0;          
             Die();
         }
+        healthBar.UpdateHealthBar(currentHealth);
+    }
+
+    void Die()
+    {
+        Instantiate(deathParticleSystem, transform.position, Quaternion.identity);
+
+        Destroy(gameObject);
     }
 }
