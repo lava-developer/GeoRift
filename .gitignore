@@ -28,3 +28,6 @@ $RECYCLE.BIN/
 
 Temp/
 Temp/*
+
+# Builds directory
+./Builds

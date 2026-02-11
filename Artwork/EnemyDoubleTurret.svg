@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="750"
+   viewBox="0 0 500 750"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="EnemyDoubleTurret.svg"
+   inkscape:export-filename="EnemyDoubleTurret.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="390.32294"
+     inkscape:cy="398.10112"
+     inkscape:window-width="2560"
+     inkscape:window-height="1334"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Warstwa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:type="star"
+       style="fill:#d06f00;fill-opacity:1;stroke:none;stroke-opacity:1;stroke-width:1.00022837;stroke-dasharray:none;paint-order:normal;stroke-linecap:butt;stroke-linejoin:miter"
+       id="path1"
+       inkscape:flatsided="true"
+       sodipodi:sides="6"
+       sodipodi:cx="196.82536"
+       sodipodi:cy="289.08725"
+       sodipodi:r1="182.25742"
+       sodipodi:r2="157.83955"
+       sodipodi:arg1="-1.0471976"
+       sodipodi:arg2="-0.52359878"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 287.95406,131.24769 91.12872,157.83955 -91.1287,157.83956 -182.25742,10e-6 L 14.567947,289.08726 105.69665,131.2477 Z"
+       transform="matrix(1.3716863,0,0,1.3716872,-19.982654,-21.537281)" />
+    <path
+       id="path1-8"
+       style="fill:#f78500;fill-opacity:1;stroke:none;stroke-width:1.372;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       d="M 142.3125,188.49414 C 106.42773,250.66276 70.542969,312.83138 34.658203,375 70.542969,437.16927 106.42773,499.33854 142.3125,561.50781 c 71.79036,0 143.58073,0 215.37109,0 C 393.56836,499.33854 429.45312,437.16927 465.33789,375 429.45313,312.83073 393.56836,250.66146 357.68359,188.49219 c -71.79036,6.5e-4 -143.58073,0.001 -215.37109,0.002 z" />
+    <rect
+       style="fill:#616161;fill-opacity:1;stroke:none;stroke-width:0.959314"
+       id="rect2-8"
+       width="103.53835"
+       height="158.493"
+       x="198.23082"
+       y="591.50598" />
+    <rect
+       style="fill:#616161;fill-opacity:1;stroke:none;stroke-width:0.959315"
+       id="rect1"
+       width="103.53835"
+       height="158.4935"
+       x="198.23082"
+       y="0" />
+  </g>
+</svg>

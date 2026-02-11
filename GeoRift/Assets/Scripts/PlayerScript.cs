@@ -17,20 +17,16 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] GameObject deathParticleSystem;
     [SerializeField] HealthBar healthBar;
-    [SerializeField] Volume volume;
-    [SerializeField] Color deathVignetteColor;
-    [SerializeField] float deathVignetteIntensity = 0.6f;
+    [SerializeField] Sprite whiteSprite;
 
     Transform tf;
     Rigidbody2D rb;
     Camera cam;
     PlayerInput input;
     SpriteRenderer sr;
-    
     Vector2 movementInput;
     MovementState movementState = MovementState.Free;
-    Vignette vignette;
-    Color vignetteOriginalColor;
+    Sprite sprite;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,8 +38,7 @@ public class PlayerScript : MonoBehaviour
         input = GetComponent<PlayerInput>();
         sr = GetComponent<SpriteRenderer>();
 
-        volume.profile.TryGet<Vignette>(out vignette);
-        vignetteOriginalColor = vignette.color.value;
+        sprite = sr.sprite;
 
         // Bind input actions
         input.actions["Aim"].performed += OnAim;
@@ -84,7 +79,7 @@ public class PlayerScript : MonoBehaviour
         // Take damage when colliding with an enemy
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            IEnemy enemy = collision.gameObject.GetComponent<IEnemy>();
+            IEnemy enemy = collision.gameObject.GetComponentInChildren<IEnemy>();
             enemy.Knockback((collision.gameObject.transform.position - tf.position).normalized, playerKnockbackForce);
             TakeDamage(enemy.AttackDamage, (tf.position - collision.gameObject.transform.position).normalized, enemy.KnockbackForce);
         }
@@ -98,7 +93,7 @@ public class PlayerScript : MonoBehaviour
 
     IEnumerator Blinking()
     {
-        sr.color = Color.white;
+        sr.sprite = whiteSprite;
         while (movementState == MovementState.Knocked)
         {
             sr.enabled = false;
@@ -106,7 +101,7 @@ public class PlayerScript : MonoBehaviour
             sr.enabled = true;
             yield return new WaitForSeconds(blinkInterval);
         }
-        sr.color = new Color(0.2169999f, 0.7369609f, 1f, 1f);
+        sr.sprite = sprite;
     }
 
     void Knockback(Vector2 direction, float force)
@@ -134,8 +129,6 @@ public class PlayerScript : MonoBehaviour
             Knockback(knockbackDirection, knockbackForce);
         
         healthBar.UpdateHealthBar(currentHealth);
-        vignette.color.value = Color.Lerp(deathVignetteColor, vignetteOriginalColor, t);
-        vignette.intensity.value = Mathf.Lerp(deathVignetteIntensity, 0.1f, t);
     }
 
     void Die()
