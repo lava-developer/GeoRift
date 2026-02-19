@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e2f2ff0874cd70c4ebd35dcd7b3eab71
+guid: 199e1ca38cbb0a44f8edde86750ab640
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1702279688969781617
-    second: BasicEnemy_0
+      213: 574421678854157218
+    second: EnemyTurretWhite_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,9 +49,9 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16.666666
+  alignment: 9
+  spritePivot: {x: 0.5, y: 0.6206374}
+  spritePixelsToUnits: 500
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BasicEnemy_0
+      name: EnemyTurretWhite_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 50
-        height: 50
+        width: 500
+        height: 659
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1710869ab56bf9710800000000000000
-      internalID: 1702279688969781617
+      spriteID: 2a3b2673971c8f700800000000000000
+      internalID: 574421678854157218
       vertices: []
       indices: 
       edges: []
@@ -139,7 +139,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BasicEnemy_0: 1702279688969781617
+      EnemyTurretWhite_0: 574421678854157218
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

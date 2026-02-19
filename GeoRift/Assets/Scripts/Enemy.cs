@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour, IEnemy
+public class Enemy : MonoBehaviour, IEntity
 {
     public float KnockbackForce {get; } = 25f;
     [SerializeField] int _attackDamage = 34;
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour, IEnemy
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         movementSpeed = agent.speed;
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameManager.Instance.Player.transform;
     }
 
     void FixedUpdate()

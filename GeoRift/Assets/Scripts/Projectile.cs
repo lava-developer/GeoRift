@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public class PlayerProjectile : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
+    public int shooterID;
+    
     [SerializeField] float knockbackForce = 15f;
     [SerializeField] int damage = 34;
     [SerializeField] float projectileSpeed = 20f;
@@ -23,11 +25,11 @@ public class PlayerProjectile : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D collision)
     {   
         // If hit an enemy deal damage and destroy projectile
-        if (collision.gameObject.CompareTag("Enemy"))
+        if ((collision.gameObject.CompareTag("Enemy") ||  collision.gameObject.CompareTag("Player")) && collision.transform.GetChild(0).gameObject.GetInstanceID() != shooterID)
         {
-            IEnemy enemy = collision.gameObject.GetComponentInChildren<IEnemy>();
-            enemy.TakeDamage(damage);
-            enemy.Knockback(rb.linearVelocity.normalized, knockbackForce);
+            IEntity entity = collision.gameObject.GetComponentInChildren<IEntity>();
+            entity.Knockback(rb.linearVelocity.normalized, knockbackForce);
+            entity.TakeDamage(damage);
             Destroy(gameObject);
         }
         // If hit environment just destroy projectile

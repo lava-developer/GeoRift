@@ -2,18 +2,21 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 
-public class PlayerScript : MonoBehaviour
+public class PlayerScript : MonoBehaviour, IEntity
 {
+    public float KnockbackForce => playerKnockbackForce;
+    public int AttackDamage => attackDamage;
+
     [SerializeField] int maxHealth = 100;
     int currentHealth;
     [SerializeField] float movementSpeed = 10f;
     [SerializeField] float playerKnockbackForce = 30f;
+    [SerializeField] int attackDamage = 20;
     [SerializeField] float blinkDuration = 0.1f;
     [SerializeField] float blinkInterval = 0.1f;
 
+    [SerializeField] Transform shootPoint;
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] GameObject deathParticleSystem;
     [SerializeField] HealthBar healthBar;
@@ -27,6 +30,12 @@ public class PlayerScript : MonoBehaviour
     Vector2 movementInput;
     MovementState movementState = MovementState.Free;
     Sprite sprite;
+
+    enum MovementState
+    {
+        Free,
+        Knocked,
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -79,16 +88,11 @@ public class PlayerScript : MonoBehaviour
         // Take damage when colliding with an enemy
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            IEnemy enemy = collision.gameObject.GetComponentInChildren<IEnemy>();
+            IEntity enemy = collision.gameObject.GetComponentInChildren<IEntity>();
             enemy.Knockback((collision.gameObject.transform.position - tf.position).normalized, playerKnockbackForce);
-            TakeDamage(enemy.AttackDamage, (tf.position - collision.gameObject.transform.position).normalized, enemy.KnockbackForce);
+            Knockback((tf.position - collision.gameObject.transform.position).normalized, enemy.KnockbackForce);
+            TakeDamage(enemy.AttackDamage);
         }
-    }
-
-    enum MovementState
-    {
-        Free,
-        Knocked,
     }
 
     IEnumerator Blinking()
@@ -104,7 +108,7 @@ public class PlayerScript : MonoBehaviour
         sr.sprite = sprite;
     }
 
-    void Knockback(Vector2 direction, float force)
+    public void Knockback(Vector2 direction, float force)
     {
         movementState = MovementState.Knocked;
 
@@ -115,7 +119,7 @@ public class PlayerScript : MonoBehaviour
         StartCoroutine(Blinking());
     }
 
-    void TakeDamage(int damage, Vector2 knockbackDirection, float knockbackForce)
+   public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         float t = currentHealth / (float)maxHealth;
@@ -125,8 +129,6 @@ public class PlayerScript : MonoBehaviour
             currentHealth = 0;
             Die();
         }
-        else
-            Knockback(knockbackDirection, knockbackForce);
         
         healthBar.UpdateHealthBar(currentHealth);
     }
@@ -153,6 +155,7 @@ public class PlayerScript : MonoBehaviour
     void OnShoot(InputAction.CallbackContext context)
     {
         // Instantiating projectile on shoot
-        GameObject projectile = Instantiate(projectilePrefab, tf.position + tf.up * 0.58f, tf.rotation);
+        Projectile projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation).GetComponent<Projectile>();
+        projectile.shooterID = gameObject.GetInstanceID();
     }
 }

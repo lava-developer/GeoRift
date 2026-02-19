@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IEnemy
+public interface IEntity
 {
     void Knockback(Vector2 direction, float force);
     void TakeDamage(int damage);

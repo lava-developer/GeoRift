@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5615275178722589508}
   - component: {fileID: 5137441424288888680}
   m_Layer: 0
-  m_Name: EnemyDoubleTurretDeathParticleSystem
+  m_Name: EnemyTurretDeathParticleSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.96862745, g: 0.52156866, b: 0, a: 1}
+      maxColor: {r: 1, g: 0.9019608, b: 0.3019608, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

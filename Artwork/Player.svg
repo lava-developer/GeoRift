@@ -9,6 +9,9 @@
    id="svg1"
    inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
    sodipodi:docname="Player.svg"
+   inkscape:export-filename="Player.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,8 +27,8 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
      inkscape:zoom="0.97548401"
-     inkscape:cx="193.74997"
-     inkscape:cy="194.26254"
+     inkscape:cx="152.74469"
+     inkscape:cy="198.36307"
      inkscape:window-width="2560"
      inkscape:window-height="1334"
      inkscape:window-x="-11"
@@ -40,7 +43,7 @@
      id="layer1">
     <path
        sodipodi:type="star"
-       style="fill:#37bcff;stroke-width:1.372;fill-opacity:1"
+       style="fill:#14b0ff;stroke-width:1.372;fill-opacity:1"
        id="path1"
        inkscape:flatsided="true"
        sodipodi:sides="3"
@@ -56,5 +59,11 @@
        inkscape:transform-center-y="-72.168766"
        transform="matrix(1.2886936,0,0,1.2886936,-72.280192,-51.625001)"
        inkscape:transform-center-x="-1.4423443e-05" />
+    <path
+       id="path2"
+       style="fill:#37bcff;fill-opacity:1;stroke-width:1.76809"
+       inkscape:transform-center-x="-1.4423443e-05"
+       inkscape:transform-center-y="-72.168766"
+       d="m 51.970703,469.99805 c 132.019527,0 264.039067,0 396.058597,0 C 382.01888,355.66081 316.00846,241.32357 249.99805,126.98633 183.98893,241.32357 117.97982,355.66081 51.970703,469.99805 Z" />
   </g>
 </svg>
