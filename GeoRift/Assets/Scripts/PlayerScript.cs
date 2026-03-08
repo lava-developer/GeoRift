@@ -26,10 +26,9 @@ public class PlayerScript : MonoBehaviour, IEntity
     Rigidbody2D rb;
     Camera cam;
     PlayerInput input;
-    SpriteRenderer sr;
     Vector2 movementInput;
+    Material material;
     MovementState movementState = MovementState.Free;
-    Sprite sprite;
 
     enum MovementState
     {
@@ -45,9 +44,8 @@ public class PlayerScript : MonoBehaviour, IEntity
         rb = GetComponentInParent<Rigidbody2D>();
         cam = Camera.main;
         input = GetComponent<PlayerInput>();
-        sr = GetComponent<SpriteRenderer>();
 
-        sprite = sr.sprite;
+        material = GetComponent<Renderer>().material;
 
         // Bind input actions
         input.actions["Aim"].performed += OnAim;
@@ -97,15 +95,13 @@ public class PlayerScript : MonoBehaviour, IEntity
 
     IEnumerator Blinking()
     {
-        sr.sprite = whiteSprite;
         while (movementState == MovementState.Knocked)
         {
-            sr.enabled = false;
+            material.SetFloat("_White", 1f);
             yield return new WaitForSeconds(blinkDuration);
-            sr.enabled = true;
+            material.SetFloat("_White", 0f);
             yield return new WaitForSeconds(blinkInterval);
         }
-        sr.sprite = sprite;
     }
 
     public void Knockback(Vector2 direction, float force)

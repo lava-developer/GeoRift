@@ -19,27 +19,25 @@ public class Enemy : MonoBehaviour, IEntity
     [SerializeField] Sprite whiteSprite;
 
     Rigidbody2D rb;
-    SpriteRenderer sr;
+    Material material;
     NavMeshAgent agent;
 
     Transform target;
     float movementSpeed;
     MovementState movementState = MovementState.Free;
     Coroutine blinkCoroutine;
-    Sprite sprite;
 
     void Start()
     {
         // Initialize components
         rb = GetComponentInParent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
         agent = GetComponentInParent<NavMeshAgent>();
 
         currentHealth = maxHealth;
         healthBar.InitializeHealthBar(maxHealth);
         AttackDamage = _attackDamage;
 
-        sprite = sr.sprite;
+        material = GetComponent<Renderer>().material;
 
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -76,18 +74,16 @@ public class Enemy : MonoBehaviour, IEntity
     IEnumerator Blinking()
     {
         // Blink sprite white while knocked back
-        sr.sprite = whiteSprite;
 
         int blinkAmount = Mathf.CeilToInt(immunityDuration / (blinkDuration + blinkInterval));
 
         for (int i = 0; i < blinkAmount; i++)
         {
-            sr.enabled = false;
+            material.SetFloat("_White", 1f);
             yield return new WaitForSeconds(blinkDuration);
-            sr.enabled = true;
+            material.SetFloat("_White", 0f);
             yield return new WaitForSeconds(blinkInterval);
         }
-        sr.sprite = sprite;
     }
 
     public void Knockback(Vector2 direction, float force)
