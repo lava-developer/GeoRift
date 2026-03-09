@@ -385,11 +385,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BasicEnemy
   _attackDamage: 34
   maxHealth: 100
-  immunityDuration: 0.5
+  immunityDuration: 1
   blinkDuration: 0.1
   blinkInterval: 0.1
   deathParticleSystem: {fileID: 5401106026225049902, guid: c9bd45c3eae594e40a879cb185268783, type: 3}
-  healthBar: {fileID: 6038792071116707985}
   whiteSprite: {fileID: 21300000, guid: 88fb62d8395fe6e42ab51fd7c030c414, type: 3}
 --- !u!61 &853453254422646609
 BoxCollider2D:

@@ -23,7 +23,6 @@ public class EnemyShooter : MonoBehaviour
     {
         if (hasLineOfSight())
         {
-            //tf.rotation = Quaternion.LookRotation(Vector3.forward, target.position - tf.position);
             Vector3 dir = target.position - tf.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             tf.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -41,6 +40,7 @@ public class EnemyShooter : MonoBehaviour
 
     bool hasLineOfSight()
     {
+        // Check if there are any obstacles between the enemy and the player
         Vector2 direction = (target.position - transform.position).normalized;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 50f, obstacleMask);
         return hit && hit.collider.CompareTag("Player");

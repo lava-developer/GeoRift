@@ -7,19 +7,20 @@ public class Enemy : MonoBehaviour, IEntity
     public float KnockbackForce {get; } = 25f;
     [SerializeField] int _attackDamage = 34;
     public int AttackDamage {get; private set; }
+    public bool Immune {get; private set; }
 
     [SerializeField] int maxHealth = 100;
     int currentHealth;
-    [SerializeField] float immunityDuration = 0.5f;
+    [SerializeField] float immunityDuration = 1f;
     [SerializeField] float blinkDuration = 0.1f;
     [SerializeField] float blinkInterval = 0.1f;
 
     [SerializeField] GameObject deathParticleSystem;
-    [SerializeField] HealthBar healthBar;
     [SerializeField] Sprite whiteSprite;
 
     Rigidbody2D rb;
     Material material;
+    HealthBar healthBar;
     NavMeshAgent agent;
 
     Transform target;
@@ -34,8 +35,10 @@ public class Enemy : MonoBehaviour, IEntity
         agent = GetComponentInParent<NavMeshAgent>();
 
         currentHealth = maxHealth;
+        healthBar = transform.parent.GetComponentInChildren<HealthBar>();
         healthBar.InitializeHealthBar(maxHealth);
         AttackDamage = _attackDamage;
+        Immune = false;
 
         material = GetComponent<Renderer>().material;
 
@@ -75,6 +78,7 @@ public class Enemy : MonoBehaviour, IEntity
     {
         // Blink sprite white while knocked back
 
+        Immune = true;
         int blinkAmount = Mathf.CeilToInt(immunityDuration / (blinkDuration + blinkInterval));
 
         for (int i = 0; i < blinkAmount; i++)
@@ -84,6 +88,7 @@ public class Enemy : MonoBehaviour, IEntity
             material.SetFloat("_White", 0f);
             yield return new WaitForSeconds(blinkInterval);
         }
+        Immune = false;
     }
 
     public void Knockback(Vector2 direction, float force)

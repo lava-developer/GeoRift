@@ -7,12 +7,15 @@ public class PlayerScript : MonoBehaviour, IEntity
 {
     public float KnockbackForce => playerKnockbackForce;
     public int AttackDamage => attackDamage;
+    public bool Immune {get; private set; }
 
     [SerializeField] int maxHealth = 100;
     int currentHealth;
     [SerializeField] float movementSpeed = 10f;
     [SerializeField] float playerKnockbackForce = 30f;
     [SerializeField] int attackDamage = 20;
+    [SerializeField] float shootCooldown = 0.5f;
+    [SerializeField] float immunityDuration = 1f;
     [SerializeField] float blinkDuration = 0.1f;
     [SerializeField] float blinkInterval = 0.1f;
 
@@ -28,6 +31,7 @@ public class PlayerScript : MonoBehaviour, IEntity
     PlayerInput input;
     Vector2 movementInput;
     Material material;
+    float shootTimer;
     MovementState movementState = MovementState.Free;
 
     enum MovementState
@@ -60,6 +64,8 @@ public class PlayerScript : MonoBehaviour, IEntity
     {
         // Get movement input from input
         movementInput = InputSystem.actions.FindAction("Move").ReadValue<Vector2>();
+
+        shootTimer += Time.deltaTime;
     }
 
     void FixedUpdate()
@@ -87,21 +93,31 @@ public class PlayerScript : MonoBehaviour, IEntity
         if (collision.gameObject.CompareTag("Enemy"))
         {
             IEntity enemy = collision.gameObject.GetComponentInChildren<IEntity>();
-            enemy.Knockback((collision.gameObject.transform.position - tf.position).normalized, playerKnockbackForce);
-            Knockback((tf.position - collision.gameObject.transform.position).normalized, enemy.KnockbackForce);
-            TakeDamage(enemy.AttackDamage);
+            if (!enemy.Immune)
+                enemy.Knockback((collision.gameObject.transform.position - tf.position).normalized, playerKnockbackForce);
+            if (!Immune)
+            {
+                Knockback((tf.position - collision.gameObject.transform.position).normalized, enemy.KnockbackForce);
+                TakeDamage(enemy.AttackDamage);
+            }
         }
     }
 
     IEnumerator Blinking()
     {
-        while (movementState == MovementState.Knocked)
+        // Blink sprite white while knocked back
+
+        Immune = true;
+        int blinkAmount = Mathf.CeilToInt(immunityDuration / (blinkDuration + blinkInterval));
+
+        for (int i = 0; i < blinkAmount; i++)
         {
             material.SetFloat("_White", 1f);
             yield return new WaitForSeconds(blinkDuration);
             material.SetFloat("_White", 0f);
             yield return new WaitForSeconds(blinkInterval);
         }
+        Immune = false;
     }
 
     public void Knockback(Vector2 direction, float force)
@@ -150,8 +166,11 @@ public class PlayerScript : MonoBehaviour, IEntity
 
     void OnShoot(InputAction.CallbackContext context)
     {
+        if (shootTimer < shootCooldown) return;
+        
         // Instantiating projectile on shoot
         Projectile projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation).GetComponent<Projectile>();
         projectile.shooterID = gameObject.GetInstanceID();
+        shootTimer = 0f;
     }
 }

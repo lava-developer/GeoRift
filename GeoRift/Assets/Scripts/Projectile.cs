@@ -28,8 +28,11 @@ public class Projectile : MonoBehaviour
         if ((collision.gameObject.CompareTag("Enemy") ||  collision.gameObject.CompareTag("Player")) && collision.transform.GetChild(0).gameObject.GetInstanceID() != shooterID)
         {
             IEntity entity = collision.gameObject.GetComponentInChildren<IEntity>();
-            entity.Knockback(rb.linearVelocity.normalized, knockbackForce);
-            entity.TakeDamage(damage);
+            if (!entity.Immune)
+            {
+                entity.Knockback(rb.linearVelocity.normalized, knockbackForce);
+                entity.TakeDamage(damage);
+            }
             Destroy(gameObject);
         }
         // If hit environment just destroy projectile

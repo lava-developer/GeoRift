@@ -6,8 +6,7 @@ public class HealthBar : MonoBehaviour
 {
     Slider slider;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         slider = GetComponent<Slider>();
     }

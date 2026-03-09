@@ -3,7 +3,17 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public GameObject Player;
+    private GameObject _player;
+    public GameObject Player
+    {
+        get
+        {
+            if (_player == null)
+                _player = GameObject.FindGameObjectWithTag("Player");
+            return _player;
+        }
+    }
+
 
     void Awake()
     {
@@ -16,7 +26,5 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        Player = GameObject.FindGameObjectWithTag("Player");
     }
 }

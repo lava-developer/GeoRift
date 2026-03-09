@@ -7,4 +7,5 @@ public interface IEntity
     
     float KnockbackForce {get; }
     int AttackDamage {get; }
+    bool Immune {get; }
 }
