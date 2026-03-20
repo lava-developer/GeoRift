@@ -5,24 +5,21 @@ using UnityEngine.InputSystem;
 
 public class PlayerScript : MonoBehaviour, IEntity
 {
-    public float KnockbackForce => playerKnockbackForce;
-    public int AttackDamage => attackDamage;
-    public bool Immune {get; private set; }
+    public bool Immune { get; private set; }
 
-    [SerializeField] int maxHealth = 100;
+    public int MaxHealth;
     int currentHealth;
-    [SerializeField] float movementSpeed = 10f;
-    [SerializeField] float playerKnockbackForce = 30f;
-    [SerializeField] int attackDamage = 20;
-    [SerializeField] float shootCooldown = 0.5f;
-    [SerializeField] float immunityDuration = 1f;
+    public float MovementSpeed;
+    public float KnockbackForce { get; set; }
+    public float ShootCooldown;
+    public float ImmunityDuration;
+    public HealthBar HealthBar;
+    
     [SerializeField] float blinkDuration = 0.1f;
     [SerializeField] float blinkInterval = 0.1f;
-
     [SerializeField] Transform shootPoint;
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] GameObject deathParticleSystem;
-    [SerializeField] HealthBar healthBar;
     [SerializeField] Sprite whiteSprite;
 
     Transform tf;
@@ -43,6 +40,9 @@ public class PlayerScript : MonoBehaviour, IEntity
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Load player stats from GameManager
+        PlayerStatistics.UpdatePlayerStats();
+
         // Initialize components
         tf = transform;
         rb = GetComponentInParent<Rigidbody2D>();
@@ -55,8 +55,8 @@ public class PlayerScript : MonoBehaviour, IEntity
         input.actions["Aim"].performed += OnAim;
         input.actions["Shoot"].performed += OnShoot;
 
-        currentHealth = maxHealth;
-        healthBar.InitializeHealthBar(maxHealth);
+        currentHealth = MaxHealth;
+        HealthBar.InitializeHealthBar(MaxHealth);
     }
 
     // Update is called once per frame
@@ -74,7 +74,7 @@ public class PlayerScript : MonoBehaviour, IEntity
         switch (movementState)
         {
             case MovementState.Free:
-                rb.linearVelocity = movementInput.normalized * movementSpeed;
+                rb.linearVelocity = movementInput.normalized * MovementSpeed;
                 break;
             
             case MovementState.Knocked:
@@ -92,9 +92,9 @@ public class PlayerScript : MonoBehaviour, IEntity
         // Take damage when colliding with an enemy
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            IEntity enemy = collision.gameObject.GetComponentInChildren<IEntity>();
+            Enemy enemy = collision.gameObject.GetComponentInChildren<Enemy>();
             if (!enemy.Immune)
-                enemy.Knockback((collision.gameObject.transform.position - tf.position).normalized, playerKnockbackForce);
+                enemy.Knockback((collision.gameObject.transform.position - tf.position).normalized, KnockbackForce);
             if (!Immune)
             {
                 Knockback((tf.position - collision.gameObject.transform.position).normalized, enemy.KnockbackForce);
@@ -108,7 +108,7 @@ public class PlayerScript : MonoBehaviour, IEntity
         // Blink sprite white while knocked back
 
         Immune = true;
-        int blinkAmount = Mathf.CeilToInt(immunityDuration / (blinkDuration + blinkInterval));
+        int blinkAmount = Mathf.CeilToInt(ImmunityDuration / (blinkDuration + blinkInterval));
 
         for (int i = 0; i < blinkAmount; i++)
         {
@@ -134,7 +134,7 @@ public class PlayerScript : MonoBehaviour, IEntity
    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        float t = currentHealth / (float)maxHealth;
+        float t = currentHealth / (float)MaxHealth;
         t = Mathf.Clamp01(t);
         if (currentHealth <= 0)
         {
@@ -142,7 +142,7 @@ public class PlayerScript : MonoBehaviour, IEntity
             Die();
         }
         
-        healthBar.UpdateHealthBar(currentHealth);
+        HealthBar.UpdateHealthBar(currentHealth);
     }
 
     void Die()
@@ -166,7 +166,7 @@ public class PlayerScript : MonoBehaviour, IEntity
 
     void OnShoot(InputAction.CallbackContext context)
     {
-        if (shootTimer < shootCooldown) return;
+        if (shootTimer < ShootCooldown) return;
         
         // Instantiating projectile on shoot
         Projectile projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation).GetComponent<Projectile>();

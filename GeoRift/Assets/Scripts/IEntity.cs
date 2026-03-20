@@ -6,6 +6,5 @@ public interface IEntity
     void TakeDamage(int damage);
     
     float KnockbackForce {get; }
-    int AttackDamage {get; }
     bool Immune {get; }
 }

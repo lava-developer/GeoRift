@@ -4,13 +4,13 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, IEntity
 {
-    public float KnockbackForce {get; } = 25f;
-    [SerializeField] int _attackDamage = 34;
-    public int AttackDamage {get; private set; }
-    public bool Immune {get; private set; }
+    public float KnockbackForce { get; } = 25f;
+    public int AttackDamage;
+    public bool Immune { get; private set; }
 
     [SerializeField] int maxHealth = 100;
     int currentHealth;
+    [SerializeField] float knockbackModifier = 1f;
     [SerializeField] float immunityDuration = 1f;
     [SerializeField] float blinkDuration = 0.1f;
     [SerializeField] float blinkInterval = 0.1f;
@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour, IEntity
     Material material;
     HealthBar healthBar;
     NavMeshAgent agent;
+    EnemySpawner spawner;
 
     Transform target;
     float movementSpeed;
@@ -29,15 +30,17 @@ public class Enemy : MonoBehaviour, IEntity
     Coroutine blinkCoroutine;
 
     void Start()
+    
     {
         // Initialize components
         rb = GetComponentInParent<Rigidbody2D>();
         agent = GetComponentInParent<NavMeshAgent>();
+        spawner = FindFirstObjectByType<EnemySpawner>();
 
+        maxHealth = Mathf.RoundToInt(maxHealth * GameManager.EnemyHealthModifier);
         currentHealth = maxHealth;
         healthBar = transform.parent.GetComponentInChildren<HealthBar>();
         healthBar.InitializeHealthBar(maxHealth);
-        AttackDamage = _attackDamage;
         Immune = false;
 
         material = GetComponent<Renderer>().material;
@@ -98,7 +101,7 @@ public class Enemy : MonoBehaviour, IEntity
         movementState = MovementState.Knocked;
 
         rb.linearVelocity = Vector2.zero;
-        rb.AddForce(direction * force, ForceMode2D.Impulse);
+        rb.AddForce(direction * force * knockbackModifier, ForceMode2D.Impulse);
 
         if (blinkCoroutine != null)
         {
@@ -123,7 +126,7 @@ public class Enemy : MonoBehaviour, IEntity
     void Die()
     {
         Instantiate(deathParticleSystem, transform.position, Quaternion.identity);
-
+        spawner.EnemyDeath();
         Destroy(transform.parent.gameObject);
     }
 }

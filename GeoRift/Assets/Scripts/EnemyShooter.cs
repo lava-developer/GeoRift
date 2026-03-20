@@ -9,6 +9,7 @@ public class EnemyShooter : MonoBehaviour
     [SerializeField] LayerMask obstacleMask;
 
     Transform tf;
+    Rigidbody2D rb;
     Transform target;
 
     float shootTimer;
@@ -16,26 +17,27 @@ public class EnemyShooter : MonoBehaviour
     void Start()
     {
         tf = transform;
+        rb = tf.parent.GetComponent<Rigidbody2D>();
         target = GameManager.Instance.Player.transform;
     }
 
     void Update()
     {
+        Vector3 dir = target.position - tf.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        tf.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        tf.rotation = Quaternion.AngleAxis(angle + 90f, Vector3.forward);
+
+        shootTimer += Time.deltaTime;
+
         if (hasLineOfSight())
         {
-            Vector3 dir = target.position - tf.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            tf.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            tf.rotation = Quaternion.AngleAxis(angle + 90f, Vector3.forward);
-
-            shootTimer += Time.deltaTime;
             if (shootTimer >= shootInterval)
             {
                 Shoot();
                 shootTimer = 0f;
             }
         }
-        
     }
 
     bool hasLineOfSight()

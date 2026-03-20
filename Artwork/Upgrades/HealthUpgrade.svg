@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="700"
+   viewBox="0 0 132.29166 185.20833"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="HealthUpgrade.svg"
+   inkscape:export-filename="HealthUpgrade.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1"
+     inkscape:cx="282.5"
+     inkscape:cy="276.5"
+     inkscape:window-width="2560"
+     inkscape:window-height="1334"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <rect
+       x="172.2222"
+       y="447.98274"
+       width="369.04757"
+       height="204.0013"
+       id="rect3" />
+  </defs>
+  <g
+     inkscape:label="Warstwa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff;stroke-width:0.897906;fill-opacity:1"
+       id="rect1"
+       width="132.29166"
+       height="185.20833"
+       x="2.8243583e-06"
+       y="-6.2353519e-07" />
+    <rect
+       style="fill:#3c3c3c;fill-opacity:1;stroke-width:0.533104"
+       id="rect2"
+       width="119.06249"
+       height="171.97916"
+       x="6.6145849"
+       y="6.6145854" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458332,0,0,0.26458332,-28.243236,-24.372302)"
+       id="text2"
+       style="line-height:1;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect3);display:inline;fill:#242424;fill-opacity:1;stroke-width:1.372"
+       x="184.52379"
+       y="0"><tspan
+         x="234.54602"
+         y="498.44912"
+         id="tspan4"><tspan
+           style="font-size:66.6667px;font-family:Unispace;-inkscape-font-specification:'Unispace, Normal';fill:#ffffff"
+           id="tspan3">Health </tspan></tspan><tspan
+         x="214.17934"
+         y="565.1158"
+         id="tspan16"><tspan
+           style="font-size:66.6667px;font-family:Unispace;-inkscape-font-specification:'Unispace, Normal';fill:#ffffff"
+           id="tspan15">Upgrade</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.6389px;line-height:0.6;font-family:Unispace;-inkscape-font-specification:'Unispace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;white-space:pre;inline-size:105.56;display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.363008"
+       x="70.242249"
+       y="131.23334"
+       id="text4"
+       transform="translate(-4.263925,14.79902)"><tspan
+         x="70.242249"
+         y="131.23334"
+         id="tspan18"><tspan
+   style="font-size:8.81944px;-inkscape-font-specification:'Unispace, Normal '"
+   id="tspan17">Increases your</tspan><tspan
+   y="131.23334"
+   id="tspan19"> </tspan></tspan><tspan
+         x="70.242249"
+         y="141.81667"
+         id="tspan21"><tspan
+   style="font-size:8.81944px;-inkscape-font-specification:'Unispace, Normal '"
+   id="tspan20">maximum amount of</tspan><tspan
+   y="141.81667"
+   id="tspan22"> </tspan></tspan><tspan
+         x="70.242249"
+         y="152.40002"
+         id="tspan24"><tspan
+           style="font-size:8.81944px;-inkscape-font-specification:'Unispace, Normal '"
+           id="tspan23">health</tspan></tspan></text>
+    <path
+       id="path9"
+       style="fill:#f25a44;fill-opacity:1;stroke-width:0.77968"
+       d="m 43.241238,32.119337 a 16.195993,16.195993 0 0 0 0,22.904591 L 66.145832,77.928518 89.050423,55.02393 a 16.195993,16.195993 0 0 0 0,-22.904594 16.195993,16.195993 0 0 0 -22.904592,1e-6 16.195993,16.195993 0 0 0 -22.904593,0 z" />
+  </g>
+</svg>

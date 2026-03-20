@@ -4,6 +4,7 @@ public class Projectile : MonoBehaviour
 {
     public int shooterID;
     
+    [SerializeField] bool isPlayerProjectile;
     [SerializeField] float knockbackForce = 15f;
     [SerializeField] int damage = 34;
     [SerializeField] float projectileSpeed = 20f;
@@ -16,7 +17,7 @@ public class Projectile : MonoBehaviour
     {
         // Apply velocity to projectile
         rb = GetComponent<Rigidbody2D>();
-        rb.linearVelocity = transform.up * projectileSpeed;
+        rb.linearVelocity = transform.up.normalized * projectileSpeed;
 
         // Destroy projectile after its lifetime expires
         Destroy(gameObject, lifetime);
@@ -35,7 +36,6 @@ public class Projectile : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        // If hit environment just destroy projectile
         else if (collision.gameObject.CompareTag("Environment"))
         {
             Destroy(gameObject);

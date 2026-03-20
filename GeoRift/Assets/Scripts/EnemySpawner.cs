@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
 [System.Serializable]
 public class EnemySpawnData
@@ -20,8 +19,9 @@ public class SpawnWave
 
 public class EnemySpawner : MonoBehaviour
 {
-    public List<SpawnWave> spawnWaves;
-    SpawnWave currentWave;
+    public List<SpawnWave> SpawnWaves;
+    int currentWave = 0;
+    int enemiesLeft = 0;
 
     [ContextMenu("Spawn Wave")]
     void DebugEnemySpawn()
@@ -31,12 +31,23 @@ public class EnemySpawner : MonoBehaviour
 
     public void StartWave()
     {
-        currentWave = spawnWaves[0];
-        foreach (EnemySpawnData spawnData in currentWave.spawnData)
+        foreach (EnemySpawnData spawnData in SpawnWaves[currentWave].spawnData)
         {
+            enemiesLeft += spawnData.amount;
             StartCoroutine(SpawnEnemies(spawnData));
         }
-        spawnWaves.RemoveAt(0);
+        currentWave++;
+    }
+
+    public void EnemyDeath()
+    {
+        enemiesLeft--;
+        
+        if (enemiesLeft <= 0)
+        {
+            enemiesLeft = 0;
+            GameManager.EndOfWave();
+        }
     }
 
     IEnumerator SpawnEnemies(EnemySpawnData spawnData)
