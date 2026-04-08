@@ -41,6 +41,7 @@ public class Enemy : MonoBehaviour, IEntity
         currentHealth = maxHealth;
         healthBar = transform.parent.GetComponentInChildren<HealthBar>();
         healthBar.InitializeHealthBar(maxHealth);
+        healthBar.UpdateHealthBar(currentHealth);
         Immune = false;
 
         material = GetComponent<Renderer>().material;

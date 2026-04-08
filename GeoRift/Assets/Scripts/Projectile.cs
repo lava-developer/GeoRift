@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Projectile : MonoBehaviour
 {
@@ -8,19 +9,33 @@ public class Projectile : MonoBehaviour
     [SerializeField] float knockbackForce = 15f;
     [SerializeField] int damage = 34;
     [SerializeField] float projectileSpeed = 20f;
-    [SerializeField] float lifetime = 15f;
+    [SerializeField] float spray = 10f;
 
+    ObjectPool<Projectile> pool;
     Rigidbody2D rb;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        // Apply velocity to projectile
+        pool = GameManager.Instance.Player.GetComponent<PlayerScript>().ProjectilePool;
         rb = GetComponent<Rigidbody2D>();
-        rb.linearVelocity = transform.up.normalized * projectileSpeed;
+    }
 
-        // Destroy projectile after its lifetime expires
-        Destroy(gameObject, lifetime);
+    public void Init()
+    {
+        rb.linearVelocity = Vector2.zero;
+
+        if (isPlayerProjectile)
+        {
+            damage = PlayerStatistics.BulletDamage;
+            projectileSpeed = PlayerStatistics.BulletSpeed;
+            spray = PlayerStatistics.Spray;
+        }
+
+        float randomAngle = Random.Range(-spray, spray);
+        transform.Rotate(0f, 0f, randomAngle, Space.Self);
+
+        // Apply velocity to projectile
+        rb.linearVelocity = transform.up.normalized * projectileSpeed;
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -34,11 +49,13 @@ public class Projectile : MonoBehaviour
                 entity.Knockback(rb.linearVelocity.normalized, knockbackForce);
                 entity.TakeDamage(damage);
             }
-            Destroy(gameObject);
+            pool.Release(this);
+            return;
         }
         else if (collision.gameObject.CompareTag("Environment"))
         {
-            Destroy(gameObject);
+            pool.Release(this);
+            return;
         }
     }
 }

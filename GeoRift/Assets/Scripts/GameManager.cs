@@ -1,23 +1,33 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public static class PlayerStatistics
 {
     public static int MaxHealth = 100;
+    public static int HealthRegen = 0;
     public static float MovementSpeed = 6f;
+    public static float DashCooldown = 1f;
     public static float KnockbackForce = 30f;
     public static float ShootCooldown = 0.5f;
     public static float ImmunityDuration = 0.25f;
+    public static int BulletDamage = 20;
+    public static float BulletSpeed = 15f;
+    public static float Spray = 5f;
+    public static bool AutoFire = false;
 
     public static void UpdatePlayerStats()
     {
         PlayerScript player = GameManager.Instance.Player.GetComponent<PlayerScript>();
 
         player.MaxHealth = MaxHealth;
+        player.HealthRegen = HealthRegen;
         player.MovementSpeed = MovementSpeed;
+        player.DashCooldown = DashCooldown;
         player.KnockbackForce = KnockbackForce;
         player.ShootCooldown = ShootCooldown;
         player.ImmunityDuration = ImmunityDuration;
+        player.AutoFire = AutoFire;
         
         player.HealthBar.InitializeHealthBar(MaxHealth);
     }
@@ -27,19 +37,32 @@ public static class PlayerStatistics
         switch (upgrade.statType)
         {
             case StatType.MaxHealth:
-                MaxHealth += Mathf.RoundToInt(upgrade.value);
+                MaxHealth += 25;
+                break;
+            case StatType.HealthRegen:
+                HealthRegen += 1;
                 break;
             case StatType.MovementSpeed:
-                MovementSpeed += upgrade.value;
+                MovementSpeed += 2f;
                 break;
-            case StatType.KnockbackForce:
-                KnockbackForce += upgrade.value;
+            case StatType.DashCooldown:
+                DashCooldown = Mathf.Max(0.1f, DashCooldown - 0.1f);
                 break;
             case StatType.ShootCooldown:
-                ShootCooldown = Mathf.Max(0.1f, ShootCooldown - upgrade.value);
+                ShootCooldown = Mathf.Max(0.1f, ShootCooldown - 0.1f);
                 break;
-            case StatType.ImmunityDuration:
-                ImmunityDuration += upgrade.value;
+            case StatType.BulletSpeed:
+                BulletSpeed += 7.5f;
+                break;
+            case StatType.HighCalibre:
+                BulletDamage += 20;
+                ShootCooldown += 0.5f;
+                break;
+            case StatType.SMG:
+                BulletDamage = BulletDamage / 2;
+                ShootCooldown = ShootCooldown / 3;
+                Spray = + 5f;
+                AutoFire = true;
                 break;
         }
         UpdatePlayerStats();
@@ -58,6 +81,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] UpgradeUIPanel uiPanel;
     [SerializeField] List<UpgradeData> allUpgrades;
+    List<UpgradeData> pickedSingleUseUpgrades = new List<UpgradeData>();
 
     void Awake()
     {
@@ -83,12 +107,16 @@ public class GameManager : MonoBehaviour
     public static void OnUpgradeChosen(UpgradeData upgrade)
     {
         PlayerStatistics.ApplyUpgrade(upgrade);
+        if (upgrade.oneTime)
+            Instance.pickedSingleUseUpgrades.Add(upgrade);
         Time.timeScale = 1f;
     }
 
     static List<UpgradeData> GetRandomUpgrades(int count)
     {
-        List<UpgradeData> pool = new List<UpgradeData>(Instance.allUpgrades);
+        List<UpgradeData> pool = Instance.allUpgrades
+            .Where(u => !Instance.pickedSingleUseUpgrades.Contains(u))
+            .ToList();
         List<UpgradeData> selected = new List<UpgradeData>();
 
         for (int i = 0; i < count && pool.Count > 0; i++)

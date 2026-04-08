@@ -5,9 +5,8 @@ public class UpgradeData : ScriptableObject
 {
     public Sprite sprite;
     public int rarity;
-
+    public bool oneTime;
     public StatType statType;
-    public float value;
 }
 
-public enum StatType { MaxHealth, MovementSpeed, ProjectileDamage, ShootCooldown, ImmunityDuration, KnockbackForce }
+public enum StatType { MaxHealth, HealthRegen, MovementSpeed, DashCooldown, ShootCooldown, BulletSpeed, HighCalibre, SMG }

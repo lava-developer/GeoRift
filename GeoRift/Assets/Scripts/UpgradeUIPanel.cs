@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class UpgradeUIPanel : MonoBehaviour
 {
-    [SerializeField] private GameObject panel;
-    [SerializeField] private UpgradeOptionUI[] optionSlots; // 3 sloty w UI
+    [SerializeField] GameObject panel;
+    [SerializeField] UpgradeOptionUI[] optionSlots;
 
-    private Action<UpgradeData> onChosen;
+    Action<UpgradeData> onChosen;
 
     public void Show(List<UpgradeData> options, Action<UpgradeData> callback)
     {
@@ -28,7 +28,7 @@ public class UpgradeUIPanel : MonoBehaviour
         }
     }
 
-    private void OnOptionClicked(UpgradeData chosen)
+    void OnOptionClicked(UpgradeData chosen)
     {
         panel.SetActive(false);
         onChosen?.Invoke(chosen);

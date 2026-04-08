@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="700"
+   viewBox="0 0 132.29166 185.20833"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="ShotgunUpgrade.svg"
+   inkscape:export-filename="ShotgunUpgrade.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.5"
+     inkscape:cx="-132"
+     inkscape:cy="63"
+     inkscape:window-width="2560"
+     inkscape:window-height="1334"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:lockguides="true" />
+  <defs
+     id="defs1">
+    <rect
+       x="172.2222"
+       y="447.98274"
+       width="369.04757"
+       height="204.0013"
+       id="rect3" />
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter1"
+       x="-0.011891648"
+       y="-0.011891648"
+       width="1.0237833"
+       height="1.0237833">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.06554858"
+         id="feGaussianBlur1" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter1-4"
+       x="-0.011891648"
+       y="-0.011891648"
+       width="1.0237833"
+       height="1.0237833">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.06554858"
+         id="feGaussianBlur1-8" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Warstwa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#f54fe7;stroke-width:0.897906;fill-opacity:1"
+       id="rect1"
+       width="132.29166"
+       height="185.20833"
+       x="2.8243583e-06"
+       y="-6.2353519e-07" />
+    <rect
+       style="fill:#3c3c3c;fill-opacity:1;stroke-width:0.533104"
+       id="rect2"
+       width="119.06249"
+       height="171.97916"
+       x="6.6145849"
+       y="6.6145854" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458332,0,0,0.26458332,-28.243236,-24.372302)"
+       id="text2"
+       style="line-height:1;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect3);display:inline;fill:#242424;fill-opacity:1;stroke-width:1.372"
+       x="184.52379"
+       y="0"><tspan
+         x="214.17934"
+         y="498.44912"
+         id="tspan2"><tspan
+           style="font-size:66.6667px;font-family:Unispace;-inkscape-font-specification:'Unispace, Normal';fill:#ffffff"
+           id="tspan1">Shotgun
+</tspan></tspan><tspan
+         x="214.17934"
+         y="565.1158"
+         id="tspan6"><tspan
+           style="font-size:66.6667px;font-family:Unispace;-inkscape-font-specification:'Unispace, Normal';fill:#ffffff"
+           id="tspan5">Upgrade</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.6389px;line-height:0.6;font-family:Unispace;-inkscape-font-specification:'Unispace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;white-space:pre;inline-size:105.56;display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.363008"
+       x="70.242249"
+       y="131.23334"
+       id="text4"
+       transform="translate(-4.263925,14.79902)"><tspan
+         x="70.242249"
+         y="131.23334"
+         id="tspan8"><tspan
+           style="font-size:8.81944px;-inkscape-font-specification:'Unispace, Normal '"
+           id="tspan7">Shoot buckshot
+</tspan></tspan><tspan
+         x="70.242249"
+         y="141.81667"
+         id="tspan10"><tspan
+           style="font-size:8.81944px;-inkscape-font-specification:'Unispace, Normal '"
+           id="tspan9">Lower damage, more</tspan><tspan
+           y="141.81667"
+           id="tspan11"> </tspan></tspan><tspan
+         x="70.242249"
+         y="152.40002"
+         id="tspan13"><tspan
+           style="font-size:8.81944px;-inkscape-font-specification:'Unispace, Normal '"
+           id="tspan12">bullets</tspan></tspan></text>
+    <circle
+       style="fill:#ffcc00;fill-opacity:1;stroke-width:0.370493;filter:url(#filter1)"
+       id="path1"
+       cx="62.706253"
+       cy="30.823956"
+       r="6.614583" />
+    <circle
+       style="fill:#ffcc00;fill-opacity:1;stroke-width:0.370493;filter:url(#filter1-4)"
+       id="path1-4"
+       cx="84.956268"
+       cy="51.618771"
+       r="6.614583" />
+    <circle
+       style="fill:#ffcc00;fill-opacity:1;stroke-width:0.370493;filter:url(#filter1-4)"
+       id="circle1"
+       cx="73.711472"
+       cy="75.034401"
+       r="6.614583" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffcc00;fill-opacity:1;stroke-width:0.363008"
+       id="path2"
+       inkscape:flatsided="true"
+       sodipodi:sides="3"
+       sodipodi:cx="24.321526"
+       sodipodi:cy="46.397987"
+       sodipodi:r1="12.196689"
+       sodipodi:r2="6.0983443"
+       sodipodi:arg1="-1.5707963"
+       sodipodi:arg2="-0.52359878"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 24.321526,34.201299 10.562642,18.295033 -21.125285,-1e-6 z"
+       inkscape:transform-center-y="0.66738993"
+       transform="matrix(-0.15362042,-0.2193927,0.85528331,-0.59887583,17.020692,70.044895)"
+       inkscape:transform-center-x="1.7965875" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffcc00;fill-opacity:1;stroke-width:0.363008"
+       id="path2-1"
+       inkscape:flatsided="true"
+       sodipodi:sides="3"
+       sodipodi:cx="24.321526"
+       sodipodi:cy="46.397987"
+       sodipodi:r1="12.196689"
+       sodipodi:r2="6.0983443"
+       sodipodi:arg1="-1.5707963"
+       sodipodi:arg2="-0.52359878"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 24.321526,34.201299 10.562642,18.295033 -21.125285,-1e-6 z"
+       inkscape:transform-center-y="-0.84016644"
+       transform="matrix(-0.04650802,-0.26376011,1.0282458,-0.18130748,27.913219,68.537914)"
+       inkscape:transform-center-x="2.8896735" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffcc00;fill-opacity:1;stroke-width:0.363008"
+       id="path2-6"
+       inkscape:flatsided="true"
+       sodipodi:sides="3"
+       sodipodi:cx="24.321526"
+       sodipodi:cy="46.397987"
+       sodipodi:r1="12.196689"
+       sodipodi:r2="6.0983443"
+       sodipodi:arg1="-1.5707963"
+       sodipodi:arg2="-0.52359878"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 24.321526,34.201299 10.562642,18.295033 -21.125285,-1e-6 z"
+       inkscape:transform-center-y="0.55494762"
+       transform="matrix(0.02334284,-0.26680986,1.040135,0.09100002,13.462053,76.499022)"
+       inkscape:transform-center-x="3.0482678" />
+  </g>
+</svg>

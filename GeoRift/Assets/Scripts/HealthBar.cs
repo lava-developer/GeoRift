@@ -17,7 +17,6 @@ public class HealthBar : MonoBehaviour
         Vector2 size = slider.GetComponent<RectTransform>().sizeDelta;
         size.x = maxHealth * 1.6f;
         slider.GetComponent<RectTransform>().sizeDelta = size;
-        slider.value = maxHealth;
     }
 
     public void UpdateHealthBar(int currentHealth)

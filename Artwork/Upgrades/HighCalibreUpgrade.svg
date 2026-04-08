@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="700"
+   viewBox="0 0 132.29166 185.20833"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="HighCalibreUpgrade.svg"
+   inkscape:export-filename="HighCalibreUpgrade.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1"
+     inkscape:cx="135"
+     inkscape:cy="314.5"
+     inkscape:window-width="2560"
+     inkscape:window-height="1334"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:lockguides="true" />
+  <defs
+     id="defs1">
+    <rect
+       x="172.2222"
+       y="447.98274"
+       width="369.04757"
+       height="204.0013"
+       id="rect3" />
+  </defs>
+  <g
+     inkscape:label="Warstwa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#2521f2;stroke-width:0.897906;fill-opacity:1"
+       id="rect1"
+       width="132.29166"
+       height="185.20833"
+       x="2.8243583e-06"
+       y="-6.2353519e-07" />
+    <rect
+       style="fill:#3c3c3c;fill-opacity:1;stroke-width:0.533104"
+       id="rect2"
+       width="119.06249"
+       height="171.97916"
+       x="6.6145849"
+       y="6.6145854" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458332,0,0,0.26458332,-28.243236,-24.372302)"
+       id="text2"
+       style="line-height:1;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect3);display:inline;fill:#242424;fill-opacity:1;stroke-width:1.372"
+       x="184.52379"
+       y="0"><tspan
+         x="275.27938"
+         y="498.44912"
+         id="tspan2"><tspan
+           style="font-size:66.6667px;font-family:Unispace;-inkscape-font-specification:'Unispace, Normal';fill:#ffffff"
+           id="tspan1">High </tspan></tspan><tspan
+         x="214.17934"
+         y="565.1158"
+         id="tspan5"><tspan
+           style="font-size:66.6667px;font-family:Unispace;-inkscape-font-specification:'Unispace, Normal';fill:#ffffff"
+           id="tspan3">Calibre</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.6389px;line-height:0.6;font-family:Unispace;-inkscape-font-specification:'Unispace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;white-space:pre;inline-size:105.56;display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.363008"
+       x="70.242249"
+       y="131.23334"
+       id="text4"
+       transform="translate(-4.263925,14.79902)"><tspan
+         x="70.242249"
+         y="131.23334"
+         id="tspan7"><tspan
+           style="font-size:8.81944px;-inkscape-font-specification:'Unispace, Normal '"
+           id="tspan6">Increased damage</tspan><tspan
+           y="131.23334"
+           id="tspan8"> </tspan></tspan><tspan
+         x="70.242249"
+         y="141.81667"
+         id="tspan10"><tspan
+           style="font-size:8.81944px;-inkscape-font-specification:'Unispace, Normal '"
+           id="tspan9">but decreased fire</tspan><tspan
+           y="141.81667"
+           id="tspan11"> </tspan></tspan><tspan
+         x="70.242249"
+         y="152.40002"
+         id="tspan13"><tspan
+           style="font-size:8.81944px;-inkscape-font-specification:'Unispace, Normal '"
+           id="tspan12">rate</tspan></tspan></text>
+    <path
+       id="rect11"
+       style="fill:#ffcc00;fill-opacity:1;stroke-width:0.390099"
+       d="m 26.473909,51.605403 v 12.943681 h 1.61796 v -1.617961 h 1.617961 v 1.617961 h 45.302879 l 6.471839,-1.617961 h 6.47184 v -9.70776 h -6.47184 l -6.471839,-1.61796 H 29.70983 v 1.61796 h -1.617961 v -1.61796 z" />
+    <path
+       id="rect13"
+       style="fill:#ff6814;stroke-width:0.483804"
+       d="m 87.956388,53.627854 c 0,0 22.695482,2.959081 22.651442,4.853879 -0.044,1.894799 -22.651442,4.044899 -22.651442,4.044899 z"
+       sodipodi:nodetypes="czcc" />
+  </g>
+</svg>

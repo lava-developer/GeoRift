@@ -54,6 +54,7 @@ MonoBehaviour:
   damage: 20
   projectileSpeed: 20
   lifetime: 15
+  spray: 5
 --- !u!50 &3801756033977836900
 Rigidbody2D:
   serializedVersion: 5
