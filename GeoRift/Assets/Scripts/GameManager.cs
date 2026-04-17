@@ -6,15 +6,17 @@ public static class PlayerStatistics
 {
     public static int MaxHealth = 100;
     public static int HealthRegen = 0;
-    public static float MovementSpeed = 6f;
+    public static float MovementSpeed = 3f;
     public static float DashCooldown = 1f;
     public static float KnockbackForce = 30f;
     public static float ShootCooldown = 0.5f;
     public static float ImmunityDuration = 0.25f;
     public static int BulletDamage = 20;
+    public static float BulletKnockbackForce = 15f;
     public static float BulletSpeed = 15f;
     public static float Spray = 5f;
     public static bool AutoFire = false;
+    public static bool Shotgun = false;
 
     public static void UpdatePlayerStats()
     {
@@ -28,6 +30,7 @@ public static class PlayerStatistics
         player.ShootCooldown = ShootCooldown;
         player.ImmunityDuration = ImmunityDuration;
         player.AutoFire = AutoFire;
+        player.Shotgun = Shotgun;
         
         player.HealthBar.InitializeHealthBar(MaxHealth);
     }
@@ -59,10 +62,17 @@ public static class PlayerStatistics
                 ShootCooldown += 0.5f;
                 break;
             case StatType.SMG:
-                BulletDamage = BulletDamage / 2;
+                BulletDamage /= 2;
+                BulletKnockbackForce /= 4f;
                 ShootCooldown = ShootCooldown / 3;
-                Spray = + 5f;
+                Spray = Mathf.Min(Spray * 2f, 45f);
                 AutoFire = true;
+                break;
+            case StatType.Shotgun:
+                BulletDamage = Mathf.RoundToInt(BulletDamage * 0.5f);
+                BulletKnockbackForce *= 2f;
+                Spray = Mathf.Min(Spray * 3f, 45f);
+                Shotgun = true;
                 break;
         }
         UpdatePlayerStats();

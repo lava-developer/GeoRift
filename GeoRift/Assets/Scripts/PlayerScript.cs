@@ -18,12 +18,13 @@ public class PlayerScript : MonoBehaviour, IEntity
     public float ShootCooldown;
     public float ImmunityDuration;
     public bool AutoFire;
+    public bool Shotgun;
     public HealthBar HealthBar;
     
     [SerializeField] float blinkDuration = 0.1f;
     [SerializeField] float blinkInterval = 0.1f;
-    [SerializeField] float dashForce = 20f;
-    [SerializeField] float dashDuration = 0.2f;
+    [SerializeField] float dashForce = 45f;
+    [SerializeField] float dashDuration = 0.5f;
     [SerializeField] Transform shootPoint;
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] GameObject deathParticleSystem;
@@ -227,11 +228,15 @@ public class PlayerScript : MonoBehaviour, IEntity
     {
         if (shootTimer < ShootCooldown) return;
         
-        // Instantiating projectile on shoot
-        Projectile projectile = ProjectilePool.Get();
-        projectile.transform.SetPositionAndRotation(shootPoint.position, shootPoint.rotation);
-        projectile.Init();
-        projectile.shooterID = gameObject.GetInstanceID();
+        int projectileAmount = Shotgun ? 5 : 1;
+        // Instantiating projectiles on shoot
+        for (int i = 0; i < projectileAmount; i++)
+        {
+            Projectile projectile = ProjectilePool.Get();
+            projectile.transform.SetPositionAndRotation(shootPoint.position, shootPoint.rotation);
+            projectile.Init();
+            projectile.shooterID = gameObject.GetInstanceID();
+        }
         shootTimer = 0f;
     }
 }

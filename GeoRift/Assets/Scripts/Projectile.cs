@@ -13,11 +13,13 @@ public class Projectile : MonoBehaviour
 
     ObjectPool<Projectile> pool;
     Rigidbody2D rb;
+    TrailRenderer tr;
 
     void Awake()
     {
         pool = GameManager.Instance.Player.GetComponent<PlayerScript>().ProjectilePool;
         rb = GetComponent<Rigidbody2D>();
+        tr = GetComponent<TrailRenderer>();
     }
 
     public void Init()
@@ -27,13 +29,16 @@ public class Projectile : MonoBehaviour
         if (isPlayerProjectile)
         {
             damage = PlayerStatistics.BulletDamage;
+            knockbackForce = PlayerStatistics.BulletKnockbackForce;
             projectileSpeed = PlayerStatistics.BulletSpeed;
             spray = PlayerStatistics.Spray;
         }
 
         float randomAngle = Random.Range(-spray, spray);
         transform.Rotate(0f, 0f, randomAngle, Space.Self);
-
+        
+        tr.Clear();
+        tr.emitting = true;
         // Apply velocity to projectile
         rb.linearVelocity = transform.up.normalized * projectileSpeed;
     }
@@ -49,11 +54,13 @@ public class Projectile : MonoBehaviour
                 entity.Knockback(rb.linearVelocity.normalized, knockbackForce);
                 entity.TakeDamage(damage);
             }
+            tr.emitting = false;
             pool.Release(this);
             return;
         }
         else if (collision.gameObject.CompareTag("Environment"))
         {
+            tr.emitting = false;
             pool.Release(this);
             return;
         }

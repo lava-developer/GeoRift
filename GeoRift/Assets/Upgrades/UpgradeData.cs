@@ -9,4 +9,4 @@ public class UpgradeData : ScriptableObject
     public StatType statType;
 }
 
-public enum StatType { MaxHealth, HealthRegen, MovementSpeed, DashCooldown, ShootCooldown, BulletSpeed, HighCalibre, SMG }
+public enum StatType { MaxHealth, HealthRegen, MovementSpeed, DashCooldown, ShootCooldown, BulletSpeed, HighCalibre, SMG, Shotgun }

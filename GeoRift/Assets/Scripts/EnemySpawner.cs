@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+using TMPro;
 
 [System.Serializable]
 public class EnemySpawnData
@@ -20,34 +22,42 @@ public class SpawnWave
 public class EnemySpawner : MonoBehaviour
 {
     public List<SpawnWave> SpawnWaves;
-    int currentWave = 0;
+    int waveToSpawn = 0;
     int enemiesLeft = 0;
+    
+    [SerializeField] TMP_Text waveIndicator;
 
-    [ContextMenu("Spawn Wave")]
-    void DebugEnemySpawn()
+    void Start()
     {
-        StartWave();
+        StartCoroutine(GameLoop());
     }
-
+    
+    IEnumerator GameLoop()
+    {
+        while(waveToSpawn < SpawnWaves.Count)
+        {
+            waveIndicator.text = $"Wave: {waveToSpawn + 1}";
+            yield return new WaitForSeconds(2);
+            StartWave();
+            yield return new WaitUntil(() => enemiesLeft <= 0);
+            GameManager.EndOfWave();
+        }
+        waveIndicator.text = $"All waves cleared, congratulations!";
+    }
+    
     public void StartWave()
     {
-        foreach (EnemySpawnData spawnData in SpawnWaves[currentWave].spawnData)
+        foreach (EnemySpawnData spawnData in SpawnWaves[waveToSpawn].spawnData)
         {
             enemiesLeft += spawnData.amount;
             StartCoroutine(SpawnEnemies(spawnData));
         }
-        currentWave++;
+        waveToSpawn++;
     }
 
     public void EnemyDeath()
     {
         enemiesLeft--;
-        
-        if (enemiesLeft <= 0)
-        {
-            enemiesLeft = 0;
-            GameManager.EndOfWave();
-        }
     }
 
     IEnumerator SpawnEnemies(EnemySpawnData spawnData)
