@@ -1,12 +1,9 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Pool;
 
 public class PlayerScript : MonoBehaviour, IEntity
 {
-    public ObjectPool<Projectile> ProjectilePool;
     public bool Immune { get; private set; }
 
     public int MaxHealth;
@@ -26,9 +23,9 @@ public class PlayerScript : MonoBehaviour, IEntity
     [SerializeField] float dashForce = 45f;
     [SerializeField] float dashDuration = 0.5f;
     [SerializeField] Transform shootPoint;
-    [SerializeField] GameObject projectilePrefab;
     [SerializeField] GameObject deathParticleSystem;
     [SerializeField] Sprite whiteSprite;
+    [SerializeField] AudioClip playerHit;
 
     Transform tf;
     Rigidbody2D rb;
@@ -62,15 +59,6 @@ public class PlayerScript : MonoBehaviour, IEntity
         input = GetComponent<PlayerInput>();
 
         material = GetComponent<Renderer>().material;
-
-        ProjectilePool = new ObjectPool<Projectile>(
-        createFunc: () => Instantiate(projectilePrefab).GetComponent<Projectile>(),
-        actionOnGet: p => p.gameObject.SetActive(true),
-        actionOnRelease: p => p.gameObject.SetActive(false),
-        actionOnDestroy: p => Destroy(p.gameObject),
-        defaultCapacity: 20,
-        maxSize: 50
-        );
 
         // Bind input actions
         input.actions["Aim"].performed += OnAim;
@@ -172,8 +160,7 @@ public class PlayerScript : MonoBehaviour, IEntity
    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        float t = currentHealth / (float)MaxHealth;
-        t = Mathf.Clamp01(t);
+        SoundManager.Instance.PlayClip(playerHit, tf.position, Random.Range(0.8f, 1.2f));
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -182,10 +169,18 @@ public class PlayerScript : MonoBehaviour, IEntity
         
         HealthBar.UpdateHealthBar(currentHealth);
     }
+    
+    public void Heal()
+    {
+        currentHealth = MaxHealth;
+        HealthBar.UpdateHealthBar(currentHealth);
+    }
 
     void Die()
     {
         Instantiate(deathParticleSystem, transform.position, Quaternion.identity);
+        
+        MenuManager.Instance.ShowGameOver();
 
         tf.parent.gameObject.SetActive(false);
     }
@@ -232,9 +227,9 @@ public class PlayerScript : MonoBehaviour, IEntity
         // Instantiating projectiles on shoot
         for (int i = 0; i < projectileAmount; i++)
         {
-            Projectile projectile = ProjectilePool.Get();
+            Projectile projectile = GameManager.Instance.ProjectilePool.Get();
             projectile.transform.SetPositionAndRotation(shootPoint.position, shootPoint.rotation);
-            projectile.Init();
+            projectile.Init(true);
             projectile.shooterID = gameObject.GetInstanceID();
         }
         shootTimer = 0f;

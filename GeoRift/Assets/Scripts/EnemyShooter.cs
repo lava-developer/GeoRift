@@ -3,7 +3,6 @@ using UnityEngine;
 public class EnemyShooter : MonoBehaviour
 {
     [SerializeField] Transform[] shootPoints;
-    [SerializeField] GameObject projectilePrefab;
     [SerializeField] float shootInterval = 2f;
 
     [SerializeField] LayerMask obstacleMask;
@@ -52,7 +51,9 @@ public class EnemyShooter : MonoBehaviour
     {
         foreach (Transform shootPoint in shootPoints)
         {
-            Projectile projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation).GetComponent<Projectile>();
+            Projectile projectile = GameManager.Instance.ProjectilePool.Get();
+            projectile.transform.SetPositionAndRotation(shootPoint.position, shootPoint.rotation);
+            projectile.Init(false);
             projectile.shooterID = gameObject.GetInstanceID();
         }
     }

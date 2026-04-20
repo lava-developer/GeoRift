@@ -5,11 +5,11 @@ public class Projectile : MonoBehaviour
 {
     public int shooterID;
     
-    [SerializeField] bool isPlayerProjectile;
-    [SerializeField] float knockbackForce = 15f;
-    [SerializeField] int damage = 34;
-    [SerializeField] float projectileSpeed = 20f;
-    [SerializeField] float spray = 10f;
+    bool isPlayerProjectile;
+    float knockbackForce = 15f;
+    int damage = 34;
+    float projectileSpeed = 20f;
+    float spray = 10f;
 
     ObjectPool<Projectile> pool;
     Rigidbody2D rb;
@@ -17,13 +17,14 @@ public class Projectile : MonoBehaviour
 
     void Awake()
     {
-        pool = GameManager.Instance.Player.GetComponent<PlayerScript>().ProjectilePool;
+        pool = GameManager.Instance.ProjectilePool;
         rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<TrailRenderer>();
     }
 
-    public void Init()
+    public void Init(bool isPlayers)
     {
+        isPlayerProjectile = isPlayers;
         rb.linearVelocity = Vector2.zero;
 
         if (isPlayerProjectile)
@@ -32,6 +33,13 @@ public class Projectile : MonoBehaviour
             knockbackForce = PlayerStatistics.BulletKnockbackForce;
             projectileSpeed = PlayerStatistics.BulletSpeed;
             spray = PlayerStatistics.Spray;
+        }
+        else
+        {
+            damage = 12;
+            knockbackForce = 15;
+            projectileSpeed = 20;
+            spray = 30;
         }
 
         float randomAngle = Random.Range(-spray, spray);

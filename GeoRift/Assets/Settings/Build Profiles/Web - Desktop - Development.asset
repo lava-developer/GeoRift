@@ -344,7 +344,10 @@ MonoBehaviour:
     - line: '|   m_BuildTargetGroupLightmapSettings: []'
     - line: '|   m_BuildTargetGroupLoadStoreDebugModeSettings: []'
     - line: '|   m_BuildTargetNormalMapEncoding: []'
-    - line: '|   m_BuildTargetDefaultTextureCompressionFormat: []'
+    - line: '|   m_BuildTargetDefaultTextureCompressionFormat:'
+    - line: '|   - serializedVersion: 3'
+    - line: '|     m_BuildTarget: WebGL'
+    - line: '|     m_Formats: 05000000'
     - line: '|   playModeTestRunnerEnabled: 0'
     - line: '|   runPlayModeTestAsEditModeTest: 0'
     - line: '|   actionOnDotNetUnhandledException: 1'
@@ -752,5 +755,5 @@ MonoBehaviour:
         m_AdaptivePerformanceEnabled: 0
         m_CodeOptimization: 0
         m_WebGLClientBrowserPath: 
-        m_WebGLClientBrowserType: 3
+        m_WebGLClientBrowserType: 5
         m_WebGLTextureSubtarget: 1

@@ -1,14 +1,13 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using TMPro;
 
 [System.Serializable]
 public class EnemySpawnData
 {
     public GameObject enemyPrefab;
-    public Transform spawnPoint;
+    public List<Transform> spawnPoints;
     public int amount;
     public float interval;
 }
@@ -21,25 +20,28 @@ public class SpawnWave
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner Instance { get; private set; }
     public List<SpawnWave> SpawnWaves;
-    int waveToSpawn = 0;
+    public int WaveToSpawn = 0;
     int enemiesLeft = 0;
     
     [SerializeField] TMP_Text waveIndicator;
 
-    void Start()
+    void Awake()
     {
+        Instance = this;
         StartCoroutine(GameLoop());
     }
     
     IEnumerator GameLoop()
     {
-        while(waveToSpawn < SpawnWaves.Count)
+        while(WaveToSpawn < SpawnWaves.Count)
         {
-            waveIndicator.text = $"Wave: {waveToSpawn + 1}";
+            waveIndicator.text = $"Wave: {WaveToSpawn + 1}";
             yield return new WaitForSeconds(2);
             StartWave();
             yield return new WaitUntil(() => enemiesLeft <= 0);
+            yield return new WaitForSeconds(2);
             GameManager.EndOfWave();
         }
         waveIndicator.text = $"All waves cleared, congratulations!";
@@ -47,12 +49,12 @@ public class EnemySpawner : MonoBehaviour
     
     public void StartWave()
     {
-        foreach (EnemySpawnData spawnData in SpawnWaves[waveToSpawn].spawnData)
+        foreach (EnemySpawnData spawnData in SpawnWaves[WaveToSpawn].spawnData)
         {
             enemiesLeft += spawnData.amount;
             StartCoroutine(SpawnEnemies(spawnData));
         }
-        waveToSpawn++;
+        WaveToSpawn++;
     }
 
     public void EnemyDeath()
@@ -65,7 +67,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < spawnData.amount; i++)
         {
             yield return new WaitForSeconds(spawnData.interval);
-            Instantiate(spawnData.enemyPrefab, spawnData.spawnPoint.position, Quaternion.identity);
+            Instantiate(spawnData.enemyPrefab, spawnData.spawnPoints[Random.Range(0, spawnData.spawnPoints.Count)].position, Quaternion.identity);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Pool;
 
 public static class PlayerStatistics
 {
@@ -82,35 +83,41 @@ public static class PlayerStatistics
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public ObjectPool<Projectile> ProjectilePool;
     public static float EnemyHealthModifier { get; private set; } = 1f;
     public GameObject Player
     {
         get { return _player; }
     }
     GameObject _player;
-
+    PlayerScript playerScript;
+    [SerializeField] GameObject projectilePrefab;
     [SerializeField] UpgradeUIPanel uiPanel;
     [SerializeField] List<UpgradeData> allUpgrades;
     List<UpgradeData> pickedSingleUseUpgrades = new List<UpgradeData>();
 
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
+        
         _player = GameObject.FindGameObjectWithTag("Player");
+        playerScript = _player.GetComponent<PlayerScript>();
+        
+        ProjectilePool = new ObjectPool<Projectile>(
+        createFunc: () => Instantiate(projectilePrefab).GetComponent<Projectile>(),
+        actionOnGet: p => p.gameObject.SetActive(true),
+        actionOnRelease: p => p.gameObject.SetActive(false),
+        actionOnDestroy: p => Destroy(p.gameObject),
+        defaultCapacity: 25,
+        maxSize: 200
+        );
     }
 
     public static void EndOfWave()
     {
         List<UpgradeData> options = GetRandomUpgrades(3);
         Instance.uiPanel.Show(options, OnUpgradeChosen);
+        Instance.playerScript.enabled = false;
         Time.timeScale = 0f;
     }
 
@@ -119,6 +126,8 @@ public class GameManager : MonoBehaviour
         PlayerStatistics.ApplyUpgrade(upgrade);
         if (upgrade.oneTime)
             Instance.pickedSingleUseUpgrades.Add(upgrade);
+        Instance.playerScript.Heal();
+        Instance.playerScript.enabled = true;
         Time.timeScale = 1f;
     }
 
