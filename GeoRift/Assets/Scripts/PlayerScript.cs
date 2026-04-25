@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour, IEntity
     public bool AutoFire;
     public bool Shotgun;
     public HealthBar HealthBar;
-    
+
     [SerializeField] float blinkDuration = 0.1f;
     [SerializeField] float blinkInterval = 0.1f;
     [SerializeField] float dashForce = 45f;
@@ -47,6 +47,11 @@ public class PlayerScript : MonoBehaviour, IEntity
         Dashing,
     }
 
+    void Awake()
+    {
+        cam = Camera.main;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -56,7 +61,6 @@ public class PlayerScript : MonoBehaviour, IEntity
         // Initialize components
         tf = transform;
         rb = GetComponentInParent<Rigidbody2D>();
-        cam = Camera.main;
         dashTrail = GetComponent<TrailRenderer>();
         input = GetComponent<PlayerInput>();
 
@@ -78,7 +82,7 @@ public class PlayerScript : MonoBehaviour, IEntity
     {
         // Get movement input from input
         movementInput = InputSystem.actions.FindAction("Move").ReadValue<Vector2>();
-        
+
         dashTimer -= Time.deltaTime;
         shootTimer += Time.deltaTime;
 
@@ -96,7 +100,7 @@ public class PlayerScript : MonoBehaviour, IEntity
             case MovementState.Free:
                 rb.linearVelocity = movementInput.normalized * MovementSpeed;
                 break;
-            
+
             case MovementState.Knocked:
                 if (rb.linearVelocity.magnitude < 0.5f)
                 {
@@ -113,13 +117,19 @@ public class PlayerScript : MonoBehaviour, IEntity
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Enemy enemy = collision.gameObject.GetComponentInChildren<Enemy>();
-            if (!enemy.Immune)
-                enemy.Knockback((collision.gameObject.transform.position - tf.position).normalized, KnockbackForce);
-            if (!Immune)
-            {
+            enemy.Knockback((collision.gameObject.transform.position - tf.position).normalized, KnockbackForce);
+            TakeDamage(enemy.AttackDamage);
+            if (currentHealth > enemy.AttackDamage)
                 Knockback((tf.position - collision.gameObject.transform.position).normalized, enemy.KnockbackForce);
-                TakeDamage(enemy.AttackDamage);
-            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (input != null)
+        {
+            input.actions["Aim"].performed -= OnAim;
+            input.actions["Dash"].performed -= OnDash;
         }
     }
 
@@ -150,6 +160,9 @@ public class PlayerScript : MonoBehaviour, IEntity
 
     public void Knockback(Vector2 direction, float force)
     {
+        if (Immune)
+            return;
+        
         movementState = MovementState.Knocked;
 
         // Apply knockback
@@ -159,8 +172,11 @@ public class PlayerScript : MonoBehaviour, IEntity
         StartCoroutine(Blinking());
     }
 
-   public void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
+        if (Immune)
+            return;
+        
         currentHealth -= damage;
         SoundManager.Instance.PlayClip(playerHit, tf.position, 1f, Random.Range(0.8f, 1.2f));
         if (currentHealth <= 0)
@@ -168,10 +184,10 @@ public class PlayerScript : MonoBehaviour, IEntity
             currentHealth = 0;
             Die();
         }
-        
+
         HealthBar.UpdateHealthBar(currentHealth);
     }
-    
+
     public void Heal()
     {
         currentHealth = MaxHealth;
@@ -181,10 +197,11 @@ public class PlayerScript : MonoBehaviour, IEntity
     void Die()
     {
         Instantiate(deathParticleSystem, transform.position, Quaternion.identity);
-        
+
         MenuManager.Instance.ShowGameOver();
         SoundManager.Instance.PlayClip(playerDeath, tf.position, 1f);
-        
+
+        EnemySpawnerRegistry.Current?.Disable();
         tf.parent.gameObject.SetActive(false);
     }
 
@@ -199,12 +216,12 @@ public class PlayerScript : MonoBehaviour, IEntity
     {
         movementState = MovementState.Dashing;
         dashTrail.emitting = true;
-        
+
         Vector2 dir = movementInput.sqrMagnitude > 0 ? movementInput.normalized : (Vector2)tf.up;
         rb.linearVelocity = dir * dashForce;
-        
+
         yield return new WaitForSeconds(dashDuration);
-        
+
         movementState = MovementState.Free;
         dashTrail.emitting = false;
         dashTimer = DashCooldown;
@@ -225,7 +242,7 @@ public class PlayerScript : MonoBehaviour, IEntity
     void TryShoot()
     {
         if (shootTimer < ShootCooldown) return;
-        
+
         int projectileAmount = Shotgun ? 5 : 1;
         // Instantiating projectiles on shoot
         for (int i = 0; i < projectileAmount; i++)

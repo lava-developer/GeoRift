@@ -94,7 +94,7 @@ public class KamikazeEnemy : Enemy
         Instantiate(explosionParticleSystem, transform.position, Quaternion.identity);
         CameraShake.Instance.Shake(0.5f);
         SoundManager.Instance.PlayClip(explosion, transform.position, 0.75f);
-        spawner.EnemyDeath();
+        EnemySpawnerRegistry.Current?.EnemyDeath();
         Destroy(transform.parent.gameObject);
     }
 }

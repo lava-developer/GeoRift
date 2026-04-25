@@ -109,7 +109,7 @@ public class MiniBossEnemy : Enemy
     {
         Explode();
         SoundManager.Instance.PlayClip(bossBeaten, transform.position, 1f);
-        spawner.EnemyDeath();
+        EnemySpawnerRegistry.Current?.EnemyDeath();
         Destroy(transform.parent.gameObject);
     }
 }

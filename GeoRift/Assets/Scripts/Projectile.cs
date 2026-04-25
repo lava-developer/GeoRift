@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -15,8 +14,9 @@ public class Projectile : MonoBehaviour
     ObjectPool<Projectile> pool;
     Rigidbody2D rb;
     TrailRenderer tr;
-    
+
     float age = 0f;
+    bool isReleased = true;
 
     void Awake()
     {
@@ -27,6 +27,7 @@ public class Projectile : MonoBehaviour
 
     public void Init(bool isPlayers)
     {
+        isReleased = false;
         isPlayerProjectile = isPlayers;
         rb.linearVelocity = Vector2.zero;
 
@@ -58,6 +59,18 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         age += Time.deltaTime;
+        if (age > 5f)
+        {
+            ReleaseToPool();
+        }
+    }
+
+    void ReleaseToPool()
+    {
+        if (isReleased) return;
+        isReleased = true;
+        tr.emitting = false;
+        pool.Release(this);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -71,20 +84,17 @@ public class Projectile : MonoBehaviour
             else
             {
                 IEntity entity = collision.gameObject.GetComponentInChildren<IEntity>();
-                if (!entity.Immune)
-                {
-                    entity.Knockback(rb.linearVelocity.normalized, knockbackForce);
-                    entity.TakeDamage(damage);
-                }
+                entity.Knockback(rb.linearVelocity.normalized, knockbackForce);
+                entity.TakeDamage(damage);
                 tr.emitting = false;
-                pool.Release(this);
+                ReleaseToPool();
                 return;
             }
         }
         else
         {
             tr.emitting = false;
-            pool.Release(this);
+            ReleaseToPool();
             return;
         }
     }

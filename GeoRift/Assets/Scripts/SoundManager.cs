@@ -12,7 +12,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
-    public float MasterVolume { get; set; } = 0.25f;
+    public float MasterVolume { get; set; } = 0.5625f;
 
     [SerializeField] private AudioSource musicSource;
 

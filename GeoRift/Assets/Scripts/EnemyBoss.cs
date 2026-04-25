@@ -48,6 +48,7 @@ public class BossEnemy : Enemy
     [SerializeField] Color phase3Color = new Color(1f, 0f, 0f);
     [SerializeField] Color telegraphColor = Color.yellow;
     [SerializeField] GameObject phaseTransitionParticles;
+    [SerializeField] AudioClip bossBeaten;
 
     SpriteRenderer spriteRenderer;
 
@@ -222,23 +223,14 @@ public class BossEnemy : Enemy
 
     protected override void Die()
     {
-        StartCoroutine(BossDie());
-    }
-
-    IEnumerator BossDie()
-    {
         agent.speed = 0f;
         rb.linearVelocity = Vector2.zero;
-
-        Time.timeScale = 0f;
-        yield return new WaitForSecondsRealtime(0.5f);
-        Time.timeScale = 1f;
-
+        
         CameraShake.Instance.Shake(0.8f);
-
-        yield return new WaitForSeconds(0.5f);
-
-        EnemySpawner.Instance.EnemyDeath();
+        Instantiate(deathParticleSystem, transform.parent.position, Quaternion.identity);
+        
+        SoundManager.Instance.PlayClip(bossBeaten, transform.position, 1f);
+        EnemySpawnerRegistry.Current?.EnemyDeath();
         Destroy(transform.parent.gameObject);
     }
 

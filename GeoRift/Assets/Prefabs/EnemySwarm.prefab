@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasicEnemy
   AttackDamage: 8
-  maxHealth: 15
+  maxHealth: 1
   knockbackModifier: 1
   immunityDuration: 0.25
   blinkDuration: 0.1

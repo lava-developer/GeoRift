@@ -862,9 +862,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e2956766e96da478e7b0fada664a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBoss
-  AttackDamage: 25
-  maxHealth: 600
-  knockbackModifier: 0.25
+  AttackDamage: 30
+  maxHealth: 1200
+  knockbackModifier: 0
   immunityDuration: 0.25
   blinkDuration: 0.1
   blinkInterval: 0.1
@@ -903,6 +903,7 @@ MonoBehaviour:
   phase3Color: {r: 0.45911938, g: 0.45911938, b: 0.45911938, a: 1}
   telegraphColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   phaseTransitionParticles: {fileID: 5401106026225049902, guid: 64188c59af322864585420cc6e1181d2, type: 3}
+  bossBeaten: {fileID: 8300000, guid: 0e0b93287d3f0f841b570fcee947f665, type: 3}
 --- !u!212 &727521150938573704
 SpriteRenderer:
   serializedVersion: 2

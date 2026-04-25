@@ -35,6 +35,23 @@ public static class PlayerStatistics
         
         player.HealthBar.InitializeHealthBar(MaxHealth);
     }
+    
+    public static void ResetStats()
+    {
+        MaxHealth = 100;
+        HealthRegen = 0;
+        MovementSpeed = 3f;
+        DashCooldown = 1f;
+        KnockbackForce = 30f;
+        ShootCooldown = 0.5f;
+        ImmunityDuration = 0.25f;
+        BulletDamage = 20;
+        BulletKnockbackForce = 15f;
+        BulletSpeed = 15f;
+        Spray = 5f;
+        AutoFire = false;
+        Shotgun = false;
+    }
 
     public static void ApplyUpgrade(UpgradeData upgrade)
     {
@@ -70,8 +87,7 @@ public static class PlayerStatistics
                 AutoFire = true;
                 break;
             case StatType.Shotgun:
-                BulletDamage = Mathf.RoundToInt(BulletDamage * 0.5f);
-                BulletKnockbackForce *= 2f;
+                BulletDamage = Mathf.RoundToInt(BulletDamage * 0.2f);
                 Spray = Mathf.Min(Spray * 3f, 45f);
                 Shotgun = true;
                 break;
@@ -100,6 +116,8 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         
+        PlayerStatistics.ResetStats();
+        
         _player = GameObject.FindGameObjectWithTag("Player");
         playerScript = _player.GetComponent<PlayerScript>();
         
@@ -125,7 +143,10 @@ public class GameManager : MonoBehaviour
     {
         PlayerStatistics.ApplyUpgrade(upgrade);
         if (upgrade.oneTime)
-            Instance.pickedSingleUseUpgrades.Add(upgrade);
+        {
+            Instance.pickedSingleUseUpgrades.Add(Instance.allUpgrades.Find(u => u.statType == StatType.Shotgun));
+            Instance.pickedSingleUseUpgrades.Add(Instance.allUpgrades.Find(u => u.statType == StatType.SMG));
+        }
         Instance.playerScript.Heal();
         Instance.playerScript.enabled = true;
         Time.timeScale = 1f;
