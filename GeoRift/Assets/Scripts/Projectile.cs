@@ -84,8 +84,7 @@ public class Projectile : MonoBehaviour
             else
             {
                 IEntity entity = collision.gameObject.GetComponentInChildren<IEntity>();
-                entity.Knockback(rb.linearVelocity.normalized, knockbackForce);
-                entity.TakeDamage(damage);
+                entity.TakeDamage(damage, rb.linearVelocity.normalized, knockbackForce);
                 tr.emitting = false;
                 ReleaseToPool();
                 return;

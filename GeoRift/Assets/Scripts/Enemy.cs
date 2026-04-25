@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
+using System.Xml.Serialization;
 
 public class Enemy : MonoBehaviour, IEntity
 {
@@ -84,7 +85,7 @@ public class Enemy : MonoBehaviour, IEntity
         blinkCoroutine = StartCoroutine(Blinking());
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, Vector2 knockbackDirection, float knockbackForce)
     {
         currentHealth -= damage;
         if (currentHealth <= 0)
@@ -95,13 +96,18 @@ public class Enemy : MonoBehaviour, IEntity
         }
         if (hasHealthBar)
             healthBar.UpdateHealthBar(currentHealth);
+        Knockback(knockbackDirection, knockbackForce);
     }
 
     protected virtual void Die()
     {
         Instantiate(deathParticleSystem, transform.position, Quaternion.identity);
-        EnemySpawnerRegistry.Current?.EnemyDeath();
         Destroy(transform.parent.gameObject);
+    }
+
+    protected void OnDestroy()
+    {
+        EnemySpawnerRegistry.Current?.EnemyDeath();
     }
 
     IEnumerator Blinking()

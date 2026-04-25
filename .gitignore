@@ -31,3 +31,5 @@ Temp/*
 
 # Builds directory
 ./Builds
+Builds/
+Builds/*

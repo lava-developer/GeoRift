@@ -71,7 +71,7 @@ public class KamikazeEnemy : Enemy
             Explode();
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, Vector2 knockbackDirection, float knockbackForce)
     {
         if (exploded) return;
         Explode();
@@ -88,13 +88,12 @@ public class KamikazeEnemy : Enemy
         foreach (var hit in hits)
         {
             if (hit.CompareTag("Player") || hit.CompareTag("Enemy"))
-                hit.GetComponent<IEntity>().TakeDamage(explosionDamage);
+                hit.GetComponent<IEntity>().TakeDamage(explosionDamage, (hit.transform.position - transform.position).normalized, 30f);
         }
 
         Instantiate(explosionParticleSystem, transform.position, Quaternion.identity);
         CameraShake.Instance.Shake(0.5f);
         SoundManager.Instance.PlayClip(explosion, transform.position, 0.75f);
-        EnemySpawnerRegistry.Current?.EnemyDeath();
         Destroy(transform.parent.gameObject);
     }
 }

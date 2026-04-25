@@ -118,9 +118,7 @@ public class PlayerScript : MonoBehaviour, IEntity
         {
             Enemy enemy = collision.gameObject.GetComponentInChildren<Enemy>();
             enemy.Knockback((collision.gameObject.transform.position - tf.position).normalized, KnockbackForce);
-            TakeDamage(enemy.AttackDamage);
-            if (currentHealth > enemy.AttackDamage)
-                Knockback((tf.position - collision.gameObject.transform.position).normalized, enemy.KnockbackForce);
+            TakeDamage(enemy.AttackDamage, (tf.position - collision.gameObject.transform.position).normalized, enemy.KnockbackForce);
         }
     }
 
@@ -160,9 +158,6 @@ public class PlayerScript : MonoBehaviour, IEntity
 
     public void Knockback(Vector2 direction, float force)
     {
-        if (Immune)
-            return;
-        
         movementState = MovementState.Knocked;
 
         // Apply knockback
@@ -172,7 +167,7 @@ public class PlayerScript : MonoBehaviour, IEntity
         StartCoroutine(Blinking());
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector2 knockbackDirection, float knockbackForce)
     {
         if (Immune)
             return;
@@ -184,8 +179,10 @@ public class PlayerScript : MonoBehaviour, IEntity
             currentHealth = 0;
             Die();
         }
-
+        
         HealthBar.UpdateHealthBar(currentHealth);
+        if (currentHealth > 0)
+            Knockback(knockbackDirection, knockbackForce);
     }
 
     public void Heal()

@@ -54,9 +54,9 @@ public class MiniBossEnemy : Enemy
         }
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, Vector2 knockbackDirection, float knockbackForce)
     {
-        base.TakeDamage(damage);
+        base.TakeDamage(damage, knockbackDirection, knockbackForce);
 
         float healthPercent = (float)currentHealth / maxHealth * 100f;
         if (!isPhase2 && healthPercent <= phase2HealthThreshold)
@@ -97,7 +97,7 @@ public class MiniBossEnemy : Enemy
         foreach (var hit in hits)
         {
             if (hit.CompareTag("Player"))
-                hit.GetComponent<PlayerScript>().TakeDamage(explosionDamage);
+                hit.GetComponent<PlayerScript>().TakeDamage(explosionDamage, (hit.transform.position - transform.position).normalized, 30f);
         }
 
         Instantiate(explosionParticleSystem, transform.position, Quaternion.identity);
@@ -109,7 +109,6 @@ public class MiniBossEnemy : Enemy
     {
         Explode();
         SoundManager.Instance.PlayClip(bossBeaten, transform.position, 1f);
-        EnemySpawnerRegistry.Current?.EnemyDeath();
         Destroy(transform.parent.gameObject);
     }
 }

@@ -197,9 +197,9 @@ public class BossEnemy : Enemy
         projectile.shooterID = gameObject.GetInstanceID();
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, Vector2 knockbackDirection, float knockbackForce)
     {
-        base.TakeDamage(damage);
+        base.TakeDamage(damage, knockbackDirection, knockbackForce);
 
         float healthPercent = (float)currentHealth / maxHealth;
 
@@ -230,7 +230,6 @@ public class BossEnemy : Enemy
         Instantiate(deathParticleSystem, transform.parent.position, Quaternion.identity);
         
         SoundManager.Instance.PlayClip(bossBeaten, transform.position, 1f);
-        EnemySpawnerRegistry.Current?.EnemyDeath();
         Destroy(transform.parent.gameObject);
     }
 
