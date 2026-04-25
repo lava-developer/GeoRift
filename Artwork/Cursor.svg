@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="64"
-   height="64"
-   viewBox="0 0 64 64"
+   width="32"
+   height="32"
+   viewBox="0 0 32 32"
    version="1.1"
    id="svg1"
    sodipodi:docname="Cursor.svg"
@@ -43,44 +43,44 @@
      id="layer1">
     <path
        id="path1"
-       style="fill:#ffffff;stroke-width:1.85586;fill-opacity:1"
-       d="M 32 6 A 26 26 0 0 0 6 32 A 26 26 0 0 0 32 58 A 26 26 0 0 0 58 32 A 26 26 0 0 0 32 6 z M 31.667969 10.976562 C 37.808311 10.853688 43.919701 13.618957 47.921875 18.269531 C 52.696569 23.655854 54.203334 31.59372 52.021484 38.416016 C 49.836537 45.552095 43.484647 51.129893 36.197266 52.595703 C 29.13272 54.110468 21.409067 51.560022 16.546875 46.238281 C 11.322816 40.711487 9.6272955 32.223027 12.150391 25.074219 C 14.869969 16.925674 23.084554 11.012723 31.667969 10.976562 z " />
+       style="fill:#ffffff;fill-opacity:1;stroke-width:0.92793"
+       d="M 16,3 A 13,13 0 0 0 3,16 13,13 0 0 0 16,29 13,13 0 0 0 29,16 13,13 0 0 0 16,3 Z m -0.166015,2.488281 c 3.070171,-0.061437 6.125866,1.3211975 8.126952,3.6464845 2.387347,2.6931615 3.14073,6.6620945 2.049805,10.0732425 -1.092474,3.568039 -4.268419,6.356939 -7.912109,7.089843 C 14.56636,27.055234 10.704534,25.780011 8.2734375,23.11914 5.661408,20.355743 4.8136478,16.111513 6.0751955,12.53711 7.4349845,8.462837 11.542277,5.5063615 15.833985,5.488281 Z" />
     <rect
-       style="fill:#ffffff;stroke-width:3.02338;fill-opacity:1"
+       style="fill:#ffffff;fill-opacity:1;stroke-width:1.51169"
        id="rect1"
-       width="5"
-       height="17"
-       x="29.5"
+       width="2.5"
+       height="8.5"
+       x="14.75"
        y="0" />
     <rect
-       style="fill:#ffffff;stroke-width:1.22688;fill-opacity:1"
+       style="fill:#ffffff;fill-opacity:1;stroke-width:0.61344"
        id="rect2"
-       width="5"
-       height="5"
-       x="29.5"
-       y="29.5" />
+       width="2.5"
+       height="2.5"
+       x="14.75"
+       y="14.75" />
     <rect
-       style="fill:#ffffff;stroke-width:3.02338;fill-opacity:1"
+       style="fill:#ffffff;fill-opacity:1;stroke-width:1.51169"
        id="rect3"
-       width="5"
-       height="17"
-       x="29.5"
-       y="-64"
+       width="2.5"
+       height="8.5"
+       x="14.75"
+       y="-32"
        transform="rotate(90)" />
     <rect
-       style="fill:#ffffff;stroke-width:3.02338;fill-opacity:1"
+       style="fill:#ffffff;fill-opacity:1;stroke-width:1.51169"
        id="rect4"
-       width="5"
-       height="17"
-       x="29.5"
-       y="47" />
+       width="2.5"
+       height="8.5"
+       x="14.75"
+       y="23.5" />
     <rect
-       style="fill:#ffffff;stroke-width:3.02338;fill-opacity:1"
+       style="fill:#ffffff;fill-opacity:1;stroke-width:1.51169"
        id="rect5"
-       width="5"
-       height="17"
-       x="29.5"
-       y="-17"
+       width="2.5"
+       height="8.5"
+       x="14.75"
+       y="-8.5"
        transform="rotate(90)" />
   </g>
 </svg>
