@@ -47,7 +47,7 @@ public static class PlayerStatistics
                 HealthRegen += 1;
                 break;
             case StatType.MovementSpeed:
-                MovementSpeed += 2f;
+                MovementSpeed += 1.25f;
                 break;
             case StatType.DashCooldown:
                 DashCooldown = Mathf.Max(0.1f, DashCooldown - 0.1f);

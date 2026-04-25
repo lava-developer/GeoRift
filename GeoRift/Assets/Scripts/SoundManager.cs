@@ -41,14 +41,14 @@ public class SoundManager : MonoBehaviour
         musicSource.volume = musicTracks[_currentClipIndex].volume * MasterVolume;
     }
 
-    public void PlayClip(AudioClip clip, Vector3 position, float pitch = 1f)
+    public void PlayClip(AudioClip clip, Vector3 position, float volume = 1f, float pitch = 1f)
     {
         GameObject obj = new GameObject($"AudioOneShot_{clip.name}");
         obj.transform.position = position;
         AudioSource source = obj.AddComponent<AudioSource>();
 
         source.clip = clip;
-        source.volume = MasterVolume;
+        source.volume = volume;
         source.pitch = pitch;
         source.Play();
 

@@ -25,7 +25,9 @@ public class PlayerScript : MonoBehaviour, IEntity
     [SerializeField] Transform shootPoint;
     [SerializeField] GameObject deathParticleSystem;
     [SerializeField] Sprite whiteSprite;
+    [SerializeField] AudioClip playerShoot;
     [SerializeField] AudioClip playerHit;
+    [SerializeField] AudioClip playerDeath;
 
     Transform tf;
     Rigidbody2D rb;
@@ -160,7 +162,7 @@ public class PlayerScript : MonoBehaviour, IEntity
    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        SoundManager.Instance.PlayClip(playerHit, tf.position, Random.Range(0.8f, 1.2f));
+        SoundManager.Instance.PlayClip(playerHit, tf.position, 1f, Random.Range(0.8f, 1.2f));
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -181,7 +183,8 @@ public class PlayerScript : MonoBehaviour, IEntity
         Instantiate(deathParticleSystem, transform.position, Quaternion.identity);
         
         MenuManager.Instance.ShowGameOver();
-
+        SoundManager.Instance.PlayClip(playerDeath, tf.position, 1f);
+        
         tf.parent.gameObject.SetActive(false);
     }
 
@@ -232,6 +235,7 @@ public class PlayerScript : MonoBehaviour, IEntity
             projectile.Init(true);
             projectile.shooterID = gameObject.GetInstanceID();
         }
+        SoundManager.Instance.PlayClip(playerShoot, tf.position, 0.5f, Random.Range(0.7f, 1.3f));
         shootTimer = 0f;
     }
 }

@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour, IEntity
     [SerializeField] float blinkDuration = 0.1f;
     [SerializeField] float blinkInterval = 0.1f;
     [SerializeField] GameObject deathParticleSystem;
+    [SerializeField] bool hasHealthBar = true;
 
     protected int currentHealth;
     protected Rigidbody2D rb;
@@ -42,9 +43,12 @@ public class Enemy : MonoBehaviour, IEntity
         maxHealth = Mathf.RoundToInt(maxHealth * GameManager.EnemyHealthModifier);
         currentHealth = maxHealth;
 
-        healthBar = transform.parent.GetComponentInChildren<HealthBar>();
-        healthBar.InitializeHealthBar(maxHealth);
-        healthBar.UpdateHealthBar(currentHealth);
+        if (hasHealthBar)
+        {
+            healthBar = transform.parent.GetComponentInChildren<HealthBar>();
+            healthBar.InitializeHealthBar(maxHealth);
+            healthBar.UpdateHealthBar(currentHealth);
+        }
 
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -93,7 +97,8 @@ public class Enemy : MonoBehaviour, IEntity
             Die();
             return;
         }
-        healthBar.UpdateHealthBar(currentHealth);
+        if (hasHealthBar)
+            healthBar.UpdateHealthBar(currentHealth);
     }
 
     protected virtual void Die()

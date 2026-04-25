@@ -12,6 +12,7 @@ public class KamikazeEnemy : Enemy
     [SerializeField] Color normalColor = new Color(1f, 0.6f, 0f);
     [SerializeField] Color warningColor = Color.red;
     [SerializeField] GameObject explosionParticleSystem;
+    [SerializeField] AudioClip explosion;
 
     SpriteRenderer spriteRenderer;
     float directionTimer;
@@ -86,11 +87,13 @@ public class KamikazeEnemy : Enemy
 
         foreach (var hit in hits)
         {
-            if (hit.CompareTag("Player"))
-                hit.GetComponent<PlayerScript>().TakeDamage(explosionDamage);
+            if (hit.CompareTag("Player") || hit.CompareTag("Enemy"))
+                hit.GetComponent<IEntity>().TakeDamage(explosionDamage);
         }
 
         Instantiate(explosionParticleSystem, transform.position, Quaternion.identity);
+        CameraShake.Instance.Shake(0.5f);
+        SoundManager.Instance.PlayClip(explosion, transform.position, 0.75f);
         spawner.EnemyDeath();
         Destroy(transform.parent.gameObject);
     }

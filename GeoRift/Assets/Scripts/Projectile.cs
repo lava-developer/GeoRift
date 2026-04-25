@@ -1,10 +1,11 @@
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class Projectile : MonoBehaviour
 {
     public int shooterID;
-    
+
     bool isPlayerProjectile;
     float knockbackForce = 15f;
     int damage = 34;
@@ -14,6 +15,8 @@ public class Projectile : MonoBehaviour
     ObjectPool<Projectile> pool;
     Rigidbody2D rb;
     TrailRenderer tr;
+    
+    float age = 0f;
 
     void Awake()
     {
@@ -37,36 +40,48 @@ public class Projectile : MonoBehaviour
         else
         {
             damage = 12;
-            knockbackForce = 15;
-            projectileSpeed = 20;
-            spray = 30;
+            knockbackForce = 15f;
+            projectileSpeed = 20f;
+            spray = 20f;
         }
 
         float randomAngle = Random.Range(-spray, spray);
         transform.Rotate(0f, 0f, randomAngle, Space.Self);
-        
+
         tr.Clear();
         tr.emitting = true;
         // Apply velocity to projectile
         rb.linearVelocity = transform.up.normalized * projectileSpeed;
+        age = 0f;
+    }
+
+    void Update()
+    {
+        age += Time.deltaTime;
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
-    {   
-        // If hit an enemy deal damage and destroy projectile
-        if ((collision.gameObject.CompareTag("Enemy") ||  collision.gameObject.CompareTag("Player")) && collision.transform.GetChild(0).gameObject.GetInstanceID() != shooterID)
-        {
-            IEntity entity = collision.gameObject.GetComponentInChildren<IEntity>();
-            if (!entity.Immune)
-            {
-                entity.Knockback(rb.linearVelocity.normalized, knockbackForce);
-                entity.TakeDamage(damage);
-            }
-            tr.emitting = false;
-            pool.Release(this);
+    {
+        if (collision.gameObject.CompareTag("Projectile") && age < 0.1f)
             return;
+        else if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player"))
+        {
+            if (collision.transform.GetChild(0).gameObject.GetInstanceID() == shooterID)
+                return;
+            else
+            {
+                IEntity entity = collision.gameObject.GetComponentInChildren<IEntity>();
+                if (!entity.Immune)
+                {
+                    entity.Knockback(rb.linearVelocity.normalized, knockbackForce);
+                    entity.TakeDamage(damage);
+                }
+                tr.emitting = false;
+                pool.Release(this);
+                return;
+            }
         }
-        else if (collision.gameObject.CompareTag("Environment"))
+        else
         {
             tr.emitting = false;
             pool.Release(this);

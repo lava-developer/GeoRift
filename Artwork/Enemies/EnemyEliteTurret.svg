@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="591"
+   viewBox="0 0 500 591"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="EnemyEliteTurret.svg"
+   inkscape:export-filename="EnemyEliteTurret.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1"
+     inkscape:cx="232.5"
+     inkscape:cy="254.5"
+     inkscape:window-width="2560"
+     inkscape:window-height="1334"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Warstwa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:type="star"
+       style="fill:#d15ef1;fill-opacity:1;stroke:none;stroke-width:1.00023;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       id="path1"
+       inkscape:flatsided="true"
+       sodipodi:sides="6"
+       sodipodi:cx="196.82536"
+       sodipodi:cy="289.08725"
+       sodipodi:r1="182.25742"
+       sodipodi:r2="157.83955"
+       sodipodi:arg1="-1.0471976"
+       sodipodi:arg2="-0.52359878"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 287.95406,131.24769 91.12872,157.83955 -91.1287,157.83956 -182.25742,10e-6 L 14.567947,289.08726 105.69665,131.2477 Z"
+       transform="matrix(1.3716863,0,0,1.3716872,-19.982654,-180.03078)" />
+    <path
+       id="path1-8"
+       style="fill:#bf21ed;fill-opacity:1;stroke:none;stroke-width:1.372;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       d="M 142.3125,30.00064 C 106.42773,92.16926 70.542969,154.33788 34.658203,216.5065 70.542969,278.67577 106.42773,340.84504 142.3125,403.01431 c 71.79036,0 143.58073,0 215.37109,0 35.88477,-62.16927 71.76953,-124.33854 107.6543,-186.50781 -35.88476,-62.16927 -71.76953,-124.33854 -107.6543,-186.50781 -71.79036,6.5e-4 -143.58073,0.001 -215.37109,0.002 z" />
+    <rect
+       style="fill:#8f8f8f;fill-opacity:1;stroke:none;stroke-width:0.95633"
+       id="rect2-8"
+       width="103.21629"
+       height="158"
+       x="198.23082"
+       y="433.01248" />
+  </g>
+</svg>

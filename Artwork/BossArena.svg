@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="480"
+   height="480"
+   viewBox="0 0 480 480"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="BossArena.svg"
+   inkscape:export-filename="BossArena.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.950968"
+     inkscape:cx="234.49898"
+     inkscape:cy="212.45863"
+     inkscape:window-width="2560"
+     inkscape:window-height="1334"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Warstwa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:type="star"
+       style="fill:#474747;fill-opacity:1;stroke-width:1.372"
+       id="path1"
+       inkscape:flatsided="true"
+       sodipodi:sides="8"
+       sodipodi:cx="202.97617"
+       sodipodi:cy="230.14217"
+       sodipodi:r1="176.96078"
+       sodipodi:r2="163.49045"
+       sodipodi:arg1="-1.5707963"
+       sodipodi:arg2="-1.1780972"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 202.97617,53.181381 328.10634,105.012 379.93695,230.14217 328.10633,355.27234 202.97616,407.10295 77.845991,355.27233 26.015381,230.14216 77.845998,105.01199 Z"
+       transform="matrix(0.56176995,-1.3562327,1.3562327,0.56176995,-186.15224,385.99596)" />
+    <path
+       sodipodi:type="star"
+       style="fill:#515151;fill-opacity:1;stroke-width:1.372"
+       id="path1-8"
+       inkscape:flatsided="true"
+       sodipodi:sides="8"
+       sodipodi:cx="202.97617"
+       sodipodi:cy="230.14217"
+       sodipodi:r1="176.96078"
+       sodipodi:r2="163.49045"
+       sodipodi:arg1="-1.5707963"
+       sodipodi:arg2="-1.1780972"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 202.97617,53.181381 328.10634,105.012 379.93695,230.14217 328.10633,355.27234 202.97616,407.10295 77.845991,355.27233 26.015381,230.14216 77.845998,105.01199 Z"
+       transform="matrix(0.51495578,-1.2432133,1.2432133,0.51495578,-150.63955,373.82963)" />
+  </g>
+</svg>
